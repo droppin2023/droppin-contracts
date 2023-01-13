@@ -1,10 +1,11 @@
 pragma solidity ^0.8.0;
 
 struct QuestData {
-    bytes32 description;
     bytes32 name;
     uint256 reputation;
-    uint256[] conditionIds;
+    uint256 groupId;
+    uint256[3] conditionIds;
+    uint256 requestId;
 }
 
 struct RoleData {
