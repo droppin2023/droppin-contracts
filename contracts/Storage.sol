@@ -16,12 +16,18 @@ struct RoleData {
 struct GroupData {
     bytes32 name;
     bytes32 description;
+    address owner;
 }
 
 struct GameData {
     bytes32 name;
     bytes32 description;
     address contractSrc; // contract that calls addReputation()
+}
+
+struct ConditionData {
+    uint256 groupId;
+    bytes schemaHash;
 }
 
 contract Storage {}
