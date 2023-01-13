@@ -26,8 +26,8 @@ contract Droppin is ZKPVerifier{
 
     mapping(uint256 => GroupData) public groupById;
     mapping(address => Counters.Counter) public groupByUserCounter;
-    mapping(uint256 => ConditionData) public conditionsById;
-    mapping(uint256 => QuestData) public questsById;
+    mapping(uint256 => ConditionData) public conditionById;
+    mapping(uint256 => QuestData) public questById;
 
     constructor(address _validatorAddr, string memory _circuitId) {
         validatorAddr = _validatorAddr;
@@ -49,7 +49,7 @@ contract Droppin is ZKPVerifier{
         _IsGroupOwner(msg.sender,_groupId);
         conditionIds.increment();
         verifierRequestIds.increment();
-        conditionsById[conditionIds.current()] = ConditionData(_groupId,verifierRequestIds.current());
+        conditionById[conditionIds.current()] = ConditionData(_groupId,verifierRequestIds.current());
         //TODO : fix parsing issue from bigger int to small one, might cause problem in the future
         setZKPRequest(uint64(verifierRequestIds.current()), ICircuitValidator(validatorAddr), ICircuitValidator.CircuitQuery(_schemaHash,slotIndex,operatorId,value,circuitId));
     }
@@ -64,20 +64,21 @@ contract Droppin is ZKPVerifier{
             uint256 groupId,
             uint256 schemaHash
         ) = abi.decode(_initParams,(bytes32,uint256,uint256,uint256));
-        
+
         _IsGroupOwner(msg.sender, groupId);
 
         uint256[3] memory conditions;
         for(uint256 i=0 ; i < _conditions.length; i++){
+            require(conditionById[_conditions[i]].groupId == groupId, "groups of conditions dont match");
             conditions[i] = _conditions[i];
         }
 
         setZKPRequest(uint64(verifierRequestIds.current()), ICircuitValidator(validatorAddr), ICircuitValidator.CircuitQuery(schemaHash,slotIndex,operatorId,value,circuitId));
-        questsById[questIds.current()] = QuestData(name,reputation,groupId,conditions,verifierRequestIds.current());
-
+        questById[questIds.current()] = QuestData(name,reputation,groupId,conditions,verifierRequestIds.current());
     }
 
     function _IsGroupOwner (address _user, uint256 _groupId) internal view {
+        require(_groupId != 0 , "group id can not be 0");
         require (groupById[_groupId].owner == _user, "caller is not the owner of this group");
         return ;
     }
