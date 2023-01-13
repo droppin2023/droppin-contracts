@@ -1,12 +1,12 @@
 const { createFixtureLoader } = require("ethereum-waffle");
-
-const {addresses} = require("../utils/addresses");
+const hre = require("hardhat");
+const { addresses } = require("../utils/addresses");
 const forkedNetwork = process.env.NETWORK;
-const isPolygon = hre.network.name === "polygon" || forkedNetwork == "polygon";
-const isMainnet = hre.network.name === "mainnet" || forkedNetwork == "mainnet";
+const isPolygon = hre.network.name === "polygon" || forkedNetwork === "polygon";
+const isMainnet = hre.network.name === "mainnet" || forkedNetwork === "mainnet";
 const isLocalHost = hre.network.name === "hardhat";
 console.log(hre.network.name);
-const isFork = hre.network.name == "localhost";
+const isFork = hre.network.name === "localhost";
 
 const circuitId = "credentialAtomicQuerySig";
 const validatorAddresss = "0xb1e86C4c687B85520eF4fd2a0d14e81970a15aFB";
@@ -38,7 +38,7 @@ const loadFixture = createFixtureLoader(
 
 function hexToBytes(hex) {
   for (var bytes = [], c = 0; c < hex.length; c += 2)
-      bytes.push(parseInt(hex.substr(c, 2), 16));
+    bytes.push(parseInt(hex.substr(c, 2), 16));
   return bytes;
 }
 
@@ -64,5 +64,5 @@ module.exports = {
   hexToBytes,
   fromLittleEndian,
   validatorAddresss,
-  circuitId
+  circuitId,
 };

@@ -19,4 +19,8 @@ module.exports = {
       globals: { task: true },
     },
   ],
+  rules: {
+    "node/no-unpublished-require": "off",
+    "node/no-unsupported-features/es-builtins": "off",
+  },
 };
