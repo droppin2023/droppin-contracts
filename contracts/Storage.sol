@@ -27,7 +27,7 @@ struct GameData {
 
 struct ConditionData {
     uint256 groupId;
-    bytes schemaHash;
+    uint256 requestId; // verifier request id
 }
 
 contract Storage {}

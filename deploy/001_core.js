@@ -2,7 +2,7 @@ require("hardhat");
 const { utils } = require("ethers");
 const { deployments, ethers, getNamedAccounts } = require("hardhat");
 const { parseUnits, formatUnits } = require("ethers").utils;
-const { getTokenAddresses, isFork } = require("../utils/helpers");
+const { getTokenAddresses, isFork, validatorAddresss , circuitId} = require("../utils/helpers");
 const {
   deployWithConfirmation,
   withConfirmation,
@@ -10,7 +10,7 @@ const {
 } = require("../utils/deploy");
 
 const deployCore = async () => {
-  await deployWithConfirmation("Droppin");
+  await deployWithConfirmation("Droppin",[validatorAddresss, circuitId]);
 }
 
 const setUpContracts = async () => {
