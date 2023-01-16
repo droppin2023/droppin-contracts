@@ -21,7 +21,7 @@ error CannotRemoveImmutableFunction(bytes4 _selector);
 error InitializationFunctionReverted(address _initializationContractAddress, bytes _calldata);
 
 library LibDiamond {
-    bytes32 constant DIAMOND_STORAGE_POSITION = keccak256("diamond.standard.diamond.storage");
+    bytes32 constant DIAMOND_STORAGE_POSITION = keccak256("droppinprotocol.com.diamond.storage");
 
     struct FacetAddressAndSelectorPosition {
         address facetAddress;
