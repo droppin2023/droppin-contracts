@@ -3,7 +3,8 @@ const hre = require("hardhat");
 
 async function defaultFixture() {
   await hre.deployments.fixture();
-  const cDroppin = await ethers.getContract("Droppin");
+  const cDroppin = await ethers.getContract("DroppinDiamond");
+  const cCoreFacet = await ethers.getContractAt("CoreFacet", cDroppin.address);
   const signers = await ethers.getSigners();
   const bob = signers[0];
   const pia = signers[1];
@@ -13,6 +14,7 @@ async function defaultFixture() {
     bob,
     pia,
     tay,
+    cCoreFacet,
   };
 }
 

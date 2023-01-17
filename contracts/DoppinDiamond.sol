@@ -54,3 +54,9 @@ contract DroppinDiamond {
 
     receive() external payable {}
 }
+
+//todo :
+// - KarmaFacet : review system (i.e chee vs yudish)
+// - NFT : message as parameter on mint ( like discord level in your community ) ( conditions to claim badges go into nft metadata , for example quest indexes needed or reputation needed)
+// - Quests : same like before
+// 
