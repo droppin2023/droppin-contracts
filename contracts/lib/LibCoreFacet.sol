@@ -6,13 +6,20 @@ struct GroupData {
     bytes32 name;
     address owner;
 }
+struct QuestData {
+    bytes32 name;
+    uint256 groupId;
+}
 library LibCoreFacet {
 
     using Counters for Counters.Counter;
     bytes32 constant DIAMOND_STORAGE_POSITION = keccak256("diamond.standard.diamond.storage.core");
     struct CoreState {
         Counters.Counter groupIds;
+        Counters.Counter questIds; // PolygonId Requests are the same 1 to 1
         mapping(uint256 => GroupData) groupById;
+        mapping(uint256 => QuestData) questById;
+        mapping(uint256 => mapping(address => bool)) isCompletedByUser;
     }
 
     function diamondStorage() internal pure returns (CoreState storage ds) {
@@ -21,9 +28,13 @@ library LibCoreFacet {
             ds.slot := position
         }
     }
-    function IsGroupOwner(uint256 _groupId, address owner) internal view {
+    function enforceGroupOwner(uint256 _groupId, address _owner) internal view {
         require(_groupId != 0, "group id cannot be 0");
-        require(owner != address(0), "owner address cannot be 0");
-        require(diamondStorage().groupById[_groupId].owner == owner, "caller is not the owner of the group");
+        require(_owner != address(0), "owner address cannot be 0");
+        require(diamondStorage().groupById[_groupId].owner == _owner, "caller is not the owner of the group");
+    }
+    function enforceOwnerOfQuest(uint256 _questId, address _owner ) internal view {
+        require(_owner != address(0), "owner address cannot be 0");
+        require(diamondStorage().groupById[diamondStorage().questById[_questId].groupId].owner == _owner,"caller is not the owner of the group");
     }
 }

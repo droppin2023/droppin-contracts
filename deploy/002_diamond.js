@@ -40,15 +40,33 @@ const deployAll = async () => {
     "DiamondCutFacet",
     dDroppin.address
   );
-  
+
   await deployWithConfirmation("CoreFacet");
   const cCoreFacet = await ethers.getContract("CoreFacet");
-  const selectors = getSelectors(cCoreFacet); // selectors of this facet
+  let selectors = getSelectors(cCoreFacet); // selectors of this facet
   await withConfirmation(
     cDiamondCutFacet.diamondCut(
       [
         {
           facetAddress: cCoreFacet.address,
+          action: FacetCutAction.Add,
+          functionSelectors: selectors,
+        },
+      ],
+      ethers.constants.AddressZero,
+      "0x",
+      { gasLimit: 800000 }
+    )
+  );
+
+  await deployWithConfirmation("BadgeFacet");
+  const cBadgeFacet = await ethers.getContract("BadgeFacet");
+  selectors = getSelectors(cBadgeFacet); // selectors of this facet
+  await withConfirmation(
+    cDiamondCutFacet.diamondCut(
+      [
+        {
+          facetAddress: cBadgeFacet.address,
           action: FacetCutAction.Add,
           functionSelectors: selectors,
         },

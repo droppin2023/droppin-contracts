@@ -5,6 +5,10 @@ async function defaultFixture() {
   await hre.deployments.fixture();
   const cDroppin = await ethers.getContract("DroppinDiamond");
   const cCoreFacet = await ethers.getContractAt("CoreFacet", cDroppin.address);
+  const cBadgeFacet = await ethers.getContractAt(
+    "BadgeFacet",
+    cDroppin.address
+  );
   const signers = await ethers.getSigners();
   const bob = signers[0];
   const pia = signers[1];
@@ -15,6 +19,7 @@ async function defaultFixture() {
     pia,
     tay,
     cCoreFacet,
+    cBadgeFacet,
   };
 }
 

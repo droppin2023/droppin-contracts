@@ -12,6 +12,7 @@ const {
   // parseBytes32String,
   defaultAbiCoder,
 } = require("ethers/lib/utils");
+const { ethers } = require("hardhat");
 
 describe("Droppin", async () => {
   describe("CoreFacet", async () => {
@@ -60,7 +61,7 @@ describe("Droppin", async () => {
         oldName: formatBytes32String("Lepak DAO"),
         newName: formatBytes32String("Fake Lepak DAO"),
       };
-      //should fail
+      // should fail
       let tx = await cCoreFacet.connect(tay).createGroup(testData.oldName);
       await tx.wait();
       let rd = await cCoreFacet.getGroup(4);
@@ -78,86 +79,158 @@ describe("Droppin", async () => {
       expect(rd.name).eq(testData.newName);
       expect(rd.owner).eq(bob.address);
     });
-    // it("should be able to add 1 or more condition to group", async () => {
-    //   const schemaHash = "9a7a6a513e29844f895cac0c6075ea77";
-    //   const schemaHash1 = "9a7a6a513e29844f895cac0c6075eb77";
-    //   const schemaHash2 = "9a7a6a513e29844f895cac0c6075ec77";
+    it("should add quest to group", async () => {
+      const questsToAdd = [
+        {
+          name: formatBytes32String("Quest1"),
+          groupId: 1,
+          owner: pia,
+        },
+        {
+          name: formatBytes32String("Quest2"),
+          groupId: 2,
+          owner: bob,
+        },
+        {
+          name: formatBytes32String("Quest3"),
+          groupId: 3,
+          owner: tay,
+        },
+        {
+          name: formatBytes32String("Quest4"),
+          groupId: 1,
+          owner: pia,
+        },
+      ];
 
-    //   const tx = await cDroppin
-    //     .connect(pia)
-    //     .addCondition(1, fromLittleEndian(hexToBytes(schemaHash)));
-    //   await tx.wait();
-    //   const tx1 = await cDroppin
-    //     .connect(pia)
-    //     .addCondition(1, fromLittleEndian(hexToBytes(schemaHash1)));
-    //   await tx1.wait();
-    //   const tx2 = await cDroppin
-    //     .connect(pia)
-    //     .addCondition(1, fromLittleEndian(hexToBytes(schemaHash2)));
-    //   await tx2.wait();
+      questsToAdd.forEach(async (item) => {
+        const tx = await cCoreFacet
+          .connect(item.owner)
+          .addQuest(item.groupId, item.name);
+        await tx.wait();
+      });
 
-    //   const rd = await cDroppin.conditionById(3);
-    //   expect(rd.groupId).eq(1);
-    //   expect(rd.requestId).eq(3);
-    // });
+      questsToAdd.forEach(async (item, id) => {
+        const rd = await cCoreFacet.getQuest(id + 1);
+        expect(rd.name).eq(item.name);
+        expect(rd.groupId).eq(item.groupId);
+      });
+      await expect(
+        cCoreFacet
+          .connect(bob)
+          .addQuest(questsToAdd[0].groupId, questsToAdd[0].name)
+      ).to.be.revertedWith("caller is not the owner of the group");
+    });
+  });
+  describe("BadgeFacet", async () => {
+    let cCoreFacet;
+    let cBadgeFacet;
+    let pia;
+    let tay;
+    let bob;
+    before(async () => {
+      const fixture = await loadFixture(defaultFixture);
+      pia = fixture.pia;
+      cCoreFacet = fixture.cCoreFacet;
+      cBadgeFacet = fixture.cBadgeFacet;
+      tay = fixture.tay;
+      bob = fixture.bob;
 
-    // it("FAIL : not owner cant add condition", async () => {
-    //   const schemaHash = "9a7a6a513e29844f895cac0c6075ea77";
-    //   await expect(
-    //     cDroppin
-    //       .connect(tay)
-    //       .addCondition(1, fromLittleEndian(hexToBytes(schemaHash)))
-    //   ).to.be.revertedWith("caller is not the owner of this group");
-    // });
+      // create groups
+      const groupList = [
+        {
+          name: formatBytes32String("Lepak DAO"),
+          owner: pia,
+        },
+        {
+          name: formatBytes32String("EduDAO"),
+          owner: bob,
+        },
+        {
+          name: formatBytes32String("Developer DAO"),
+          owner: tay,
+        },
+      ];
+      groupList.forEach(async (item) => {
+        const tx = await cCoreFacet.connect(item.owner).createGroup(item.name);
+        await tx.wait();
+      });
 
-    // it("should be able to add 1 or more quests", async () => {
-    //   const questInputDataFormat = ["bytes32", "uint256", "uint256", "uint256"];
-    //   const testCasesQuests = [
-    //     [
-    //       formatBytes32String("Quest 1"),
-    //       150,
-    //       1,
-    //       fromLittleEndian(hexToBytes("9a7a6a513e29844f895cac0c6075ea77")),
-    //       [1, 2],
-    //     ],
-    //     [
-    //       formatBytes32String("Quest 2"),
-    //       120,
-    //       1,
-    //       fromLittleEndian(hexToBytes("9a7a6a513e29844f895cac0c6075eb77")),
-    //       [1, 2, 3],
-    //     ],
-    //     [
-    //       formatBytes32String("Quest 3"),
-    //       620,
-    //       1,
-    //       fromLittleEndian(hexToBytes("9a7a6a513e29844f895cac0c6075ec77")),
-    //       [1],
-    //     ],
-    //   ];
-    //   for (let i = 0; i < testCasesQuests.length; i++) {
-    //     const tx = await cDroppin
-    //       .connect(pia)
-    //       .addQuest(
-    //         testCasesQuests[i][4],
-    //         defaultAbiCoder.encode(
-    //           questInputDataFormat,
-    //           testCasesQuests[i].slice(0, 4)
-    //         )
-    //       );
-    //     await tx.wait();
-    //   }
+      // add quests
+      const questsToAdd = [
+        {
+          name: formatBytes32String("Quest1"),
+          groupId: 1,
+          owner: pia,
+        },
+        {
+          name: formatBytes32String("Quest2"),
+          groupId: 2,
+          owner: bob,
+        },
+        {
+          name: formatBytes32String("Quest3"),
+          groupId: 3,
+          owner: tay,
+        },
+        {
+          name: formatBytes32String("Quest4"),
+          groupId: 1,
+          owner: pia,
+        },
+      ];
 
-    //   for (let i = 0; i < testCasesQuests.length; i++) {
-    //     const rd = await cDroppin.questById(i + 1);
-    //     expect(rd.name).eq(testCasesQuests[i][0]);
-    //     expect(rd.reputation).eq(testCasesQuests[i][1]);
-    //     expect(rd.groupId).eq(testCasesQuests[i][2]);
-    //     // expect(rd.conditionIds).eq(testCasesQuests[i][4]);
-    //     expect(rd.requestId).eq(4 + i);
-    //   }
-
-    //   // let rd = await
-    // });
+      questsToAdd.forEach(async (item) => {
+        const tx = await cCoreFacet
+          .connect(item.owner)
+          .addQuest(item.groupId, item.name);
+        await tx.wait();
+      });
+    });
+    it("should be able to create badge", async () => {
+      const badgesList = [
+        {
+          groupId: 1,
+          owner: pia,
+          requiredQuests: [1, 4, 0],
+          threshold: 1000,
+          badgePrice: 0,
+          name: "Hacker Badge",
+          symbol: "HACK",
+          URI: "www.google.com",
+        },
+      ];
+      badgesList.forEach(async (item) => {
+        const tx = await cBadgeFacet.connect(item.owner).addBadge(
+          item.groupId,
+          {
+            requiredQuests: item.requiredQuests,
+            reputationThreshold: item.threshold,
+            badgePrice: item.badgePrice,
+            name: item.name,
+            NFT: ethers.constants.AddressZero,
+          },
+          item.symbol,
+          item.URI
+        );
+        await tx.wait();
+      });
+      badgesList.forEach(async (item, id) => {
+        const rd = await cBadgeFacet.getBadge(id + 1);
+        expect(rd.name).eq(item.name);
+        expect(rd.NFT).not.eq(ethers.constants.AddressZero);
+        expect(rd.badgePrice).eq(item.badgePrice);
+        expect(rd.reputationThreshold).eq(item.threshold);
+      });
+    });
+    it("should be able to claim badge", async () => {
+      const nftAddress = (await cBadgeFacet.getBadge(1)).NFT;
+      const cNFTBadge = await ethers.getContractAt("NFTBadge", nftAddress);
+      const balanceBefore = await cNFTBadge.balanceOf(bob.address);
+      const tx = await cBadgeFacet.connect(bob).claimBadge(1);
+      await tx.wait();
+      const balanceAfter = await cNFTBadge.balanceOf(bob.address);
+      expect(balanceAfter).eq(balanceBefore + 1);
+    });
   });
 });
