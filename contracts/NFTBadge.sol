@@ -31,10 +31,6 @@ contract NFTBadge is ERC721Enumerable, Ownable {
     uint256 supply = totalSupply();
     require(!paused);
     require(supply + 1 <= maxSupply);
-    // if (msg.sender == owner()) {
-    //   require(msg.value >= cost * _mintAmo unt);
-    // }
-    // require(msg.sender==owner,"only owner can mint");
     _safeMint(_to, supply + 1);
   }
 
