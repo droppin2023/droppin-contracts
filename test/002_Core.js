@@ -11,6 +11,7 @@ const {
   formatBytes32String,
   // parseBytes32String,
   defaultAbiCoder,
+  parseEther,
 } = require("ethers/lib/utils");
 const { ethers } = require("hardhat");
 
@@ -84,29 +85,38 @@ describe("Droppin", async () => {
         {
           name: formatBytes32String("Quest1"),
           groupId: 1,
+          engagePoints: 750,
           owner: pia,
         },
         {
           name: formatBytes32String("Quest2"),
           groupId: 2,
+          engagePoints: 2000,
           owner: bob,
         },
         {
           name: formatBytes32String("Quest3"),
           groupId: 3,
+          engagePoints: 500,
           owner: tay,
         },
         {
           name: formatBytes32String("Quest4"),
           groupId: 1,
+          engagePoints: 1000,
           owner: pia,
         },
       ];
 
+      const failTry = {
+        name: formatBytes32String("Quest5"),
+        groupId: 1,
+        engagePoints: 1000,
+        owner: bob,
+      };
+
       questsToAdd.forEach(async (item) => {
-        const tx = await cCoreFacet
-          .connect(item.owner)
-          .addQuest(item.groupId, item.name);
+        const tx = await cCoreFacet.connect(item.owner).addQuest(item);
         await tx.wait();
       });
 
@@ -116,9 +126,7 @@ describe("Droppin", async () => {
         expect(rd.groupId).eq(item.groupId);
       });
       await expect(
-        cCoreFacet
-          .connect(bob)
-          .addQuest(questsToAdd[0].groupId, questsToAdd[0].name)
+        cCoreFacet.connect(bob).addQuest(failTry)
       ).to.be.revertedWith("caller is not the owner of the group");
     });
   });
@@ -161,58 +169,58 @@ describe("Droppin", async () => {
         {
           name: formatBytes32String("Quest1"),
           groupId: 1,
+          engagePoints: 750,
           owner: pia,
         },
         {
           name: formatBytes32String("Quest2"),
           groupId: 2,
+          engagePoints: 2000,
           owner: bob,
         },
         {
           name: formatBytes32String("Quest3"),
           groupId: 3,
+          engagePoints: 500,
           owner: tay,
         },
         {
           name: formatBytes32String("Quest4"),
           groupId: 1,
+          engagePoints: 100,
+          owner: pia,
+        },
+        {
+          name: formatBytes32String("Quest5"),
+          groupId: 1,
+          engagePoints: 150,
           owner: pia,
         },
       ];
 
       questsToAdd.forEach(async (item) => {
-        const tx = await cCoreFacet
-          .connect(item.owner)
-          .addQuest(item.groupId, item.name);
+        const tx = await cCoreFacet.connect(item.owner).addQuest(item);
         await tx.wait();
       });
     });
     it("should be able to create badge", async () => {
       const badgesList = [
         {
+          requiredQuests: [1, 4, 0],
+          engagePointsThreshold: 1000,
+          badgePrice: parseEther("0.01"),
+          name: "Hacker Badge",
+          NFT: ethers.constants.AddressZero,
           groupId: 1,
           owner: pia,
-          requiredQuests: [1, 4, 0],
-          threshold: 1000,
-          badgePrice: 0,
-          name: "Hacker Badge",
           symbol: "HACK",
           URI: "www.google.com",
         },
       ];
       badgesList.forEach(async (item) => {
-        const tx = await cBadgeFacet.connect(item.owner).addBadge(
-          item.groupId,
-          {
-            requiredQuests: item.requiredQuests,
-            reputationThreshold: item.threshold,
-            badgePrice: item.badgePrice,
-            name: item.name,
-            NFT: ethers.constants.AddressZero,
-          },
-          item.symbol,
-          item.URI
-        );
+        const tx = await cBadgeFacet
+          .connect(item.owner)
+          .addBadge(item, item.symbol, item.URI);
         await tx.wait();
       });
       badgesList.forEach(async (item, id) => {
@@ -220,17 +228,43 @@ describe("Droppin", async () => {
         expect(rd.name).eq(item.name);
         expect(rd.NFT).not.eq(ethers.constants.AddressZero);
         expect(rd.badgePrice).eq(item.badgePrice);
-        expect(rd.reputationThreshold).eq(item.threshold);
+        expect(rd.engagePointsThreshold).eq(item.engagePointsThreshold);
       });
     });
-    it("should be able to claim badge", async () => {
+    it("should be a member after claiming first badge", async () => {
       const nftAddress = (await cBadgeFacet.getBadge(1)).NFT;
       const cNFTBadge = await ethers.getContractAt("NFTBadge", nftAddress);
       const balanceBefore = await cNFTBadge.balanceOf(bob.address);
-      const tx = await cBadgeFacet.connect(bob).claimBadge(1);
+      await expect(cBadgeFacet.connect(bob).claimBadge(1)).to.be.revertedWith(
+        "user has not complete all quests"
+      );
+      // complete quests
+      let tx = await cCoreFacet.connect(bob).completeQuest(1);
       await tx.wait();
+      tx = await cCoreFacet.connect(bob).completeQuest(4);
+      await tx.wait();
+
+      await expect(cBadgeFacet.connect(bob).claimBadge(1)).to.be.revertedWith(
+        "user doesnt have enough engage points to claim this badge"
+      );
+
+      tx = await cCoreFacet.connect(bob).completeQuest(5);
+      await tx.wait();
+
+      await expect(cBadgeFacet.connect(bob).claimBadge(1)).to.be.revertedWith(
+        "not enought ether to obtain this badge"
+      );
+
+      tx = await cBadgeFacet
+        .connect(bob)
+        .claimBadge(1, { value: parseEther("0.01") });
+      await tx.wait();
+
       const balanceAfter = await cNFTBadge.balanceOf(bob.address);
       expect(balanceAfter).eq(balanceBefore + 1);
+
+      const rd = await cBadgeFacet.connect(bob).isMemberOfGroup(1);
+      expect(rd).eq(true);
     });
   });
 });
