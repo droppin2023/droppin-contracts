@@ -35,9 +35,8 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
 task("fund", "Fund accounts on fork")
   .addOptionalParam("amount", "Stable coin amount to fund each account with")
   .addOptionalParam("fundnetwork", "forked Network")
-  .addOptionalParam("localaccounts"," number of first local accounts to fund")
+  .addOptionalParam("localaccounts", " number of first local accounts to fund")
   .setAction(fund);
-
 
 module.exports = {
   solidity: {
@@ -45,7 +44,7 @@ module.exports = {
     settings: {
       optimizer: {
         enabled: true,
-        runs : 200
+        runs: 200,
       },
     },
   },
@@ -62,16 +61,16 @@ module.exports = {
       chainId: 1337,
       timeout: 6000000,
     },
-    mainnet : {
-      url : `${process.env.MAINNET_PROVIDER_URL}`,
+    mainnet: {
+      url: `${process.env.MAINNET_PROVIDER_URL}`,
       accounts: [
         process.env.DEPLOYER_PRIVATE_KEY || privateKeys[2],
         process.env.GOVERNOR_PRIVATE_KEY || privateKeys[1],
       ],
       chainId: 1,
     },
-    skale : {
-      url : `${process.env.SKALE_PROVIDER_URL}`,
+    skale: {
+      url: `${process.env.SKALE_PROVIDER_URL}`,
       accounts: [
         process.env.DEPLOYER_PRIVATE_KEY || privateKeys[2],
         process.env.GOVERNOR_PRIVATE_KEY || privateKeys[1],
@@ -109,16 +108,16 @@ module.exports = {
         process.env.GOVERNOR_PRIVATE_KEY || privateKeys[1],
       ],
       chainId: 56,
-    }
+    },
   },
   namedAccounts: {
     deployerAddr: {
       default: 0,
-      localhost: 0
+      localhost: 0,
     },
     governorAddr: {
       default: 1,
-      localhost: 1
+      localhost: 1,
     },
   },
   gasReporter: {
@@ -133,7 +132,7 @@ module.exports = {
     apiKey: {
       polygonMumbai: process.env.POLYGONSCAN_API_KEY,
       bscTestnet: process.env.BSCSCAN_API_KEY,
-      polygon : process.env.POLYGONSCAN_API_KEY,
+      polygon: process.env.POLYGONSCAN_API_KEY,
     },
   },
 };
