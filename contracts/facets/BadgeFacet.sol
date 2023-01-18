@@ -56,23 +56,34 @@ contract BadgeFacet {
             .badgesById[_badgeId]
             .requiredQuests;
         for (uint256 i = 0; i < requiredQuests.length; i++) {
-            if(requiredQuests[i] != 0){
-                require(cds.isCompletedByUser[requiredQuests[i]][msg.sender], "user has not complete all quests");
-            } 
+            if (requiredQuests[i] != 0) {
+                require(
+                    cds.isCompletedByUser[requiredQuests[i]][msg.sender],
+                    "user has not complete all quests"
+                );
+            }
         }
         uint256 engageThreshold = ds.badgesById[_badgeId].engagePointsThreshold;
-        if( engageThreshold > 0){
-            require(cds.userEngagePoints[ds.badgesById[_badgeId].groupId][msg.sender] >= engageThreshold, "user doesnt have enough engage points to claim this badge");
+        if (engageThreshold > 0) {
+            require(
+                cds.userEngagePoints[ds.badgesById[_badgeId].groupId][
+                    msg.sender
+                ] >= engageThreshold,
+                "user doesnt have enough engage points to claim this badge"
+            );
         }
         uint256 badgePrice = ds.badgesById[_badgeId].badgePrice;
-        if( badgePrice > 0){
-            require(msg.value >= badgePrice, "not enought ether to obtain this badge");
+        if (badgePrice > 0) {
+            require(
+                msg.value >= badgePrice,
+                "not enought ether to obtain this badge"
+            );
         }
         NFTBadge(ds.badgesById[_badgeId].NFT).mint(msg.sender);
     }
 
-    function isMemberOfGroup(uint256 _groupId) external view returns(bool) {
-        return (LibBadgeFacet.isMemberOfGroup(msg.sender,_groupId));
+    function isMemberOfGroup(uint256 _groupId) external view returns (bool) {
+        return (LibBadgeFacet.isMemberOfGroup(msg.sender, _groupId));
     }
 
     function getBadge(uint256 _badgeId)

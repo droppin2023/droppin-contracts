@@ -30,7 +30,11 @@ library LibBadgeFacet {
         }
     }
 
-    function isMemberOfGroup(address _user, uint256 _groupId) internal view returns (bool) {
+    function isMemberOfGroup(address _user, uint256 _groupId)
+        internal
+        view
+        returns (bool)
+    {
         require(
             IERC721(
                 diamondStorage()
