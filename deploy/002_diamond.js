@@ -79,16 +79,71 @@ const deployAll = async () => {
     )
   );
 
-  // scripts for testing on backend
+  const cCoreFacetProxy = await ethers.getContractAt(
+    "CoreFacet",
+    (
+      await ethers.getContract("DroppinDiamond")
+    ).address
+  );
+  let tx = await cCoreFacetProxy
+    .connect(sDeployer)
+    .createGroup(formatBytes32String("Lepak DAO"));
+  let receipt = await tx.wait();
+  //   console.log(receipt);
+  let groupCreatedEvent;
+  console.log("Create Group Tx : ", receipt.transactionHash);
+  for (const event of receipt.logs) {
+    try {
+      const parsedLog = cCoreFacetProxy.interface.parseLog(event);
+      if (parsedLog && parsedLog.name === "GroupCreated") {
+        groupCreatedEvent = parsedLog;
+        break;
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  }
+  console.log("Addding quests");
+  // add quests
+  const questsToAdd = [
+    {
+      name: formatBytes32String("Quest1"),
+      groupId: 1,
+      engagePoints: 750,
+      owner: sDeployer,
+    },
+    {
+      name: formatBytes32String("Quest2"),
+      groupId: 1,
+      engagePoints: 2000,
+      owner: sDeployer,
+    },
+    {
+      name: formatBytes32String("Quest3"),
+      groupId: 1,
+      engagePoints: 500,
+      owner: sDeployer,
+    },
+    {
+      name: formatBytes32String("Quest4"),
+      groupId: 1,
+      engagePoints: 100,
+      owner: sDeployer,
+    },
+    {
+      name: formatBytes32String("Quest5"),
+      groupId: 1,
+      engagePoints: 150,
+      owner: sDeployer,
+    },
+  ];
 
-//   let tx2 = await cCoreFacetProxy
-//     .connect(sDeployer)
-//     .modifyGroup(
-//       1,
-//       formatBytes32String("Lepak DAO"),
-//       "0xB7a0D386fA245C1E72Ca26127bA25e75816769f2"
-//     );
-//     await tx2.wait();
+  questsToAdd.forEach(async (item, id) => {
+    const tx = await cCoreFacetProxy.connect(item.owner).addQuest(item);
+    const receipt = await tx.wait();
+    console.log("Create Quest %d : ", id + 1, receipt.transactionHash);
+  });
+  // scripts for testing on backend
   //   const badgeData = {
   //     requiredQuests: [1, 4, 0],
   //     engagePointsThreshold: 1000,
@@ -116,6 +171,6 @@ const main = async () => {
   await deployAll();
 };
 
-main.id = "001_core";
-main.skip = () => true;
+main.id = "002_diamond";
+main.skip = () => false;
 module.exports = main;
