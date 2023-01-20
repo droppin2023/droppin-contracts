@@ -1,0 +1,261 @@
+{
+  "address": "0xa9A605405144619e8229645FF4Ce1F53A74A69Bb",
+  "abi": [
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "id",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "creator",
+          "type": "address"
+        }
+      ],
+      "name": "GroupCreated",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "components": [
+            {
+              "internalType": "bytes32",
+              "name": "name",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "uint256",
+              "name": "groupId",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "engagePoints",
+              "type": "uint256"
+            }
+          ],
+          "indexed": false,
+          "internalType": "struct LibCoreFacet.QuestData",
+          "name": "questData",
+          "type": "tuple"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "id",
+          "type": "uint256"
+        }
+      ],
+      "name": "QuestCreated",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "components": [
+            {
+              "internalType": "bytes32",
+              "name": "name",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "uint256",
+              "name": "groupId",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "engagePoints",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct LibCoreFacet.QuestData",
+          "name": "_questData",
+          "type": "tuple"
+        }
+      ],
+      "name": "addQuest",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_questId",
+          "type": "uint256"
+        }
+      ],
+      "name": "completeQuest",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "name",
+          "type": "bytes32"
+        }
+      ],
+      "name": "createGroup",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_groupId",
+          "type": "uint256"
+        }
+      ],
+      "name": "getGroup",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "bytes32",
+              "name": "name",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "address",
+              "name": "owner",
+              "type": "address"
+            }
+          ],
+          "internalType": "struct LibCoreFacet.GroupData",
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_questId",
+          "type": "uint256"
+        }
+      ],
+      "name": "getQuest",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "bytes32",
+              "name": "name",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "uint256",
+              "name": "groupId",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "engagePoints",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct LibCoreFacet.QuestData",
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_groupId",
+          "type": "uint256"
+        }
+      ],
+      "name": "getUserEngagePoint",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_groupId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "_newName",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "address",
+          "name": "_newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "modifyGroup",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "transactionHash": "0xad3986014946a4ce1c4eb828e1cd67a3bffa6c5fcfdb3f1cfe98449de4742880",
+  "receipt": {
+    "to": null,
+    "from": "0x17BAd8cbCDeC350958dF0Bfe01E284dd8Fec3fcD",
+    "contractAddress": "0xa9A605405144619e8229645FF4Ce1F53A74A69Bb",
+    "transactionIndex": 0,
+    "gasUsed": "496125",
+    "logsBloom": "0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    "blockHash": "0xcc26f8973ecff504e7539f9dae43bf2e173c0995a661a9066731aa490b61153d",
+    "transactionHash": "0xad3986014946a4ce1c4eb828e1cd67a3bffa6c5fcfdb3f1cfe98449de4742880",
+    "logs": [],
+    "blockNumber": 6,
+    "cumulativeGasUsed": "496125",
+    "status": 1,
+    "byzantium": true
+  },
+  "args": [],
+  "numDeployments": 1,
+  "solcInputHash": "d0daf16529b6daa7e9ce8abeaf098b45",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.13+commit.abaa5c0e\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"id\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"creator\",\"type\":\"address\"}],\"name\":\"GroupCreated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"components\":[{\"internalType\":\"bytes32\",\"name\":\"name\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"groupId\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"engagePoints\",\"type\":\"uint256\"}],\"indexed\":false,\"internalType\":\"struct LibCoreFacet.QuestData\",\"name\":\"questData\",\"type\":\"tuple\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"id\",\"type\":\"uint256\"}],\"name\":\"QuestCreated\",\"type\":\"event\"},{\"inputs\":[{\"components\":[{\"internalType\":\"bytes32\",\"name\":\"name\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"groupId\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"engagePoints\",\"type\":\"uint256\"}],\"internalType\":\"struct LibCoreFacet.QuestData\",\"name\":\"_questData\",\"type\":\"tuple\"}],\"name\":\"addQuest\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_questId\",\"type\":\"uint256\"}],\"name\":\"completeQuest\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"name\",\"type\":\"bytes32\"}],\"name\":\"createGroup\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_groupId\",\"type\":\"uint256\"}],\"name\":\"getGroup\",\"outputs\":[{\"components\":[{\"internalType\":\"bytes32\",\"name\":\"name\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"}],\"internalType\":\"struct LibCoreFacet.GroupData\",\"name\":\"\",\"type\":\"tuple\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_questId\",\"type\":\"uint256\"}],\"name\":\"getQuest\",\"outputs\":[{\"components\":[{\"internalType\":\"bytes32\",\"name\":\"name\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"groupId\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"engagePoints\",\"type\":\"uint256\"}],\"internalType\":\"struct LibCoreFacet.QuestData\",\"name\":\"\",\"type\":\"tuple\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_groupId\",\"type\":\"uint256\"}],\"name\":\"getUserEngagePoint\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_groupId\",\"type\":\"uint256\"},{\"internalType\":\"bytes32\",\"name\":\"_newName\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"_newOwner\",\"type\":\"address\"}],\"name\":\"modifyGroup\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/facets/CoreFacet.sol\":\"CoreFacet\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\",\"useLiteralContent\":true},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"@openzeppelin/contracts/utils/Counters.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n// OpenZeppelin Contracts v4.4.1 (utils/Counters.sol)\\n\\npragma solidity ^0.8.0;\\n\\n/**\\n * @title Counters\\n * @author Matt Condon (@shrugs)\\n * @dev Provides counters that can only be incremented, decremented or reset. This can be used e.g. to track the number\\n * of elements in a mapping, issuing ERC721 ids, or counting request ids.\\n *\\n * Include with `using Counters for Counters.Counter;`\\n */\\nlibrary Counters {\\n    struct Counter {\\n        // This variable should never be directly accessed by users of the library: interactions must be restricted to\\n        // the library's function. As of Solidity v0.5.2, this cannot be enforced, though there is a proposal to add\\n        // this feature: see https://github.com/ethereum/solidity/issues/4637\\n        uint256 _value; // default: 0\\n    }\\n\\n    function current(Counter storage counter) internal view returns (uint256) {\\n        return counter._value;\\n    }\\n\\n    function increment(Counter storage counter) internal {\\n        unchecked {\\n            counter._value += 1;\\n        }\\n    }\\n\\n    function decrement(Counter storage counter) internal {\\n        uint256 value = counter._value;\\n        require(value > 0, \\\"Counter: decrement overflow\\\");\\n        unchecked {\\n            counter._value = value - 1;\\n        }\\n    }\\n\\n    function reset(Counter storage counter) internal {\\n        counter._value = 0;\\n    }\\n}\\n\",\"keccak256\":\"0xf0018c2440fbe238dd3a8732fa8e17a0f9dce84d31451dc8a32f6d62b349c9f1\",\"license\":\"MIT\"},\"@openzeppelin/contracts/utils/math/SafeMath.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n// OpenZeppelin Contracts (last updated v4.6.0) (utils/math/SafeMath.sol)\\n\\npragma solidity ^0.8.0;\\n\\n// CAUTION\\n// This version of SafeMath should only be used with Solidity 0.8 or later,\\n// because it relies on the compiler's built in overflow checks.\\n\\n/**\\n * @dev Wrappers over Solidity's arithmetic operations.\\n *\\n * NOTE: `SafeMath` is generally not needed starting with Solidity 0.8, since the compiler\\n * now has built in overflow checking.\\n */\\nlibrary SafeMath {\\n    /**\\n     * @dev Returns the addition of two unsigned integers, with an overflow flag.\\n     *\\n     * _Available since v3.4._\\n     */\\n    function tryAdd(uint256 a, uint256 b) internal pure returns (bool, uint256) {\\n        unchecked {\\n            uint256 c = a + b;\\n            if (c < a) return (false, 0);\\n            return (true, c);\\n        }\\n    }\\n\\n    /**\\n     * @dev Returns the subtraction of two unsigned integers, with an overflow flag.\\n     *\\n     * _Available since v3.4._\\n     */\\n    function trySub(uint256 a, uint256 b) internal pure returns (bool, uint256) {\\n        unchecked {\\n            if (b > a) return (false, 0);\\n            return (true, a - b);\\n        }\\n    }\\n\\n    /**\\n     * @dev Returns the multiplication of two unsigned integers, with an overflow flag.\\n     *\\n     * _Available since v3.4._\\n     */\\n    function tryMul(uint256 a, uint256 b) internal pure returns (bool, uint256) {\\n        unchecked {\\n            // Gas optimization: this is cheaper than requiring 'a' not being zero, but the\\n            // benefit is lost if 'b' is also tested.\\n            // See: https://github.com/OpenZeppelin/openzeppelin-contracts/pull/522\\n            if (a == 0) return (true, 0);\\n            uint256 c = a * b;\\n            if (c / a != b) return (false, 0);\\n            return (true, c);\\n        }\\n    }\\n\\n    /**\\n     * @dev Returns the division of two unsigned integers, with a division by zero flag.\\n     *\\n     * _Available since v3.4._\\n     */\\n    function tryDiv(uint256 a, uint256 b) internal pure returns (bool, uint256) {\\n        unchecked {\\n            if (b == 0) return (false, 0);\\n            return (true, a / b);\\n        }\\n    }\\n\\n    /**\\n     * @dev Returns the remainder of dividing two unsigned integers, with a division by zero flag.\\n     *\\n     * _Available since v3.4._\\n     */\\n    function tryMod(uint256 a, uint256 b) internal pure returns (bool, uint256) {\\n        unchecked {\\n            if (b == 0) return (false, 0);\\n            return (true, a % b);\\n        }\\n    }\\n\\n    /**\\n     * @dev Returns the addition of two unsigned integers, reverting on\\n     * overflow.\\n     *\\n     * Counterpart to Solidity's `+` operator.\\n     *\\n     * Requirements:\\n     *\\n     * - Addition cannot overflow.\\n     */\\n    function add(uint256 a, uint256 b) internal pure returns (uint256) {\\n        return a + b;\\n    }\\n\\n    /**\\n     * @dev Returns the subtraction of two unsigned integers, reverting on\\n     * overflow (when the result is negative).\\n     *\\n     * Counterpart to Solidity's `-` operator.\\n     *\\n     * Requirements:\\n     *\\n     * - Subtraction cannot overflow.\\n     */\\n    function sub(uint256 a, uint256 b) internal pure returns (uint256) {\\n        return a - b;\\n    }\\n\\n    /**\\n     * @dev Returns the multiplication of two unsigned integers, reverting on\\n     * overflow.\\n     *\\n     * Counterpart to Solidity's `*` operator.\\n     *\\n     * Requirements:\\n     *\\n     * - Multiplication cannot overflow.\\n     */\\n    function mul(uint256 a, uint256 b) internal pure returns (uint256) {\\n        return a * b;\\n    }\\n\\n    /**\\n     * @dev Returns the integer division of two unsigned integers, reverting on\\n     * division by zero. The result is rounded towards zero.\\n     *\\n     * Counterpart to Solidity's `/` operator.\\n     *\\n     * Requirements:\\n     *\\n     * - The divisor cannot be zero.\\n     */\\n    function div(uint256 a, uint256 b) internal pure returns (uint256) {\\n        return a / b;\\n    }\\n\\n    /**\\n     * @dev Returns the remainder of dividing two unsigned integers. (unsigned integer modulo),\\n     * reverting when dividing by zero.\\n     *\\n     * Counterpart to Solidity's `%` operator. This function uses a `revert`\\n     * opcode (which leaves remaining gas untouched) while Solidity uses an\\n     * invalid opcode to revert (consuming all remaining gas).\\n     *\\n     * Requirements:\\n     *\\n     * - The divisor cannot be zero.\\n     */\\n    function mod(uint256 a, uint256 b) internal pure returns (uint256) {\\n        return a % b;\\n    }\\n\\n    /**\\n     * @dev Returns the subtraction of two unsigned integers, reverting with custom message on\\n     * overflow (when the result is negative).\\n     *\\n     * CAUTION: This function is deprecated because it requires allocating memory for the error\\n     * message unnecessarily. For custom revert reasons use {trySub}.\\n     *\\n     * Counterpart to Solidity's `-` operator.\\n     *\\n     * Requirements:\\n     *\\n     * - Subtraction cannot overflow.\\n     */\\n    function sub(\\n        uint256 a,\\n        uint256 b,\\n        string memory errorMessage\\n    ) internal pure returns (uint256) {\\n        unchecked {\\n            require(b <= a, errorMessage);\\n            return a - b;\\n        }\\n    }\\n\\n    /**\\n     * @dev Returns the integer division of two unsigned integers, reverting with custom message on\\n     * division by zero. The result is rounded towards zero.\\n     *\\n     * Counterpart to Solidity's `/` operator. Note: this function uses a\\n     * `revert` opcode (which leaves remaining gas untouched) while Solidity\\n     * uses an invalid opcode to revert (consuming all remaining gas).\\n     *\\n     * Requirements:\\n     *\\n     * - The divisor cannot be zero.\\n     */\\n    function div(\\n        uint256 a,\\n        uint256 b,\\n        string memory errorMessage\\n    ) internal pure returns (uint256) {\\n        unchecked {\\n            require(b > 0, errorMessage);\\n            return a / b;\\n        }\\n    }\\n\\n    /**\\n     * @dev Returns the remainder of dividing two unsigned integers. (unsigned integer modulo),\\n     * reverting with custom message when dividing by zero.\\n     *\\n     * CAUTION: This function is deprecated because it requires allocating memory for the error\\n     * message unnecessarily. For custom revert reasons use {tryMod}.\\n     *\\n     * Counterpart to Solidity's `%` operator. This function uses a `revert`\\n     * opcode (which leaves remaining gas untouched) while Solidity uses an\\n     * invalid opcode to revert (consuming all remaining gas).\\n     *\\n     * Requirements:\\n     *\\n     * - The divisor cannot be zero.\\n     */\\n    function mod(\\n        uint256 a,\\n        uint256 b,\\n        string memory errorMessage\\n    ) internal pure returns (uint256) {\\n        unchecked {\\n            require(b > 0, errorMessage);\\n            return a % b;\\n        }\\n    }\\n}\\n\",\"keccak256\":\"0x0f633a0223d9a1dcccfcf38a64c9de0874dfcbfac0c6941ccf074d63a2ce0e1e\",\"license\":\"MIT\"},\"contracts/facets/CoreFacet.sol\":{\"content\":\"pragma solidity ^0.8.0;\\n\\nimport {LibDiamond} from \\\"../lib/LibDiamond.sol\\\";\\n// import counter as we using their library\\nimport {Counters} from \\\"@openzeppelin/contracts/utils/Counters.sol\\\";\\nimport {LibCoreFacet} from \\\"../lib/LibCoreFacet.sol\\\";\\nimport {SafeMath} from \\\"@openzeppelin/contracts/utils/math/SafeMath.sol\\\";\\n\\ncontract CoreFacet {\\n    using Counters for Counters.Counter;\\n    using SafeMath for uint256;\\n\\n    event GroupCreated(uint256 id, address creator);\\n    event QuestCreated(LibCoreFacet.QuestData questData, uint256 id);\\n    function createGroup(bytes32 name) external {\\n        LibCoreFacet.CoreState storage ds = LibCoreFacet.diamondStorage();\\n        ds.groupIds.increment();\\n        ds.groupById[ds.groupIds.current()].name = name;\\n        ds.groupById[ds.groupIds.current()].owner = msg.sender;\\n        emit GroupCreated(ds.groupIds.current(), msg.sender);\\n    }   \\n\\n    function addQuest(LibCoreFacet.QuestData memory _questData) external {\\n        LibCoreFacet.CoreState storage ds = LibCoreFacet.diamondStorage();\\n        LibCoreFacet.enforceGroupOwner(_questData.groupId, msg.sender);\\n        ds.questIds.increment();\\n        ds.questById[ds.questIds.current()].name = _questData.name;\\n        ds.questById[ds.questIds.current()].groupId = _questData.groupId;\\n        ds.questById[ds.questIds.current()].engagePoints = _questData\\n            .engagePoints;\\n        emit QuestCreated(ds.questById[ds.questIds.current()], ds.questIds.current());\\n    }\\n\\n    function modifyGroup(\\n        uint256 _groupId,\\n        bytes32 _newName,\\n        address _newOwner\\n    ) external {\\n        LibCoreFacet.CoreState storage ds = LibCoreFacet.diamondStorage();\\n        LibCoreFacet.enforceGroupOwner(_groupId, msg.sender);\\n        ds.groupById[_groupId].name = _newName;\\n        ds.groupById[_groupId].owner = _newOwner;\\n    }\\n\\n    function completeQuest(uint256 _questId) external {\\n        //todo use verification from polygon id\\n        LibCoreFacet.CoreState storage ds = LibCoreFacet.diamondStorage();\\n        require(\\n            ds.isCompletedByUser[_questId][msg.sender] == false,\\n            \\\"user has already completed this quest\\\"\\n        );\\n        ds.isCompletedByUser[_questId][msg.sender] = true;\\n        ds.userEngagePoints[ds.questById[_questId].groupId][msg.sender] += (\\n            ds.questById[_questId].engagePoints\\n        );\\n    }\\n\\n    function getGroup(uint256 _groupId)\\n        external\\n        view\\n        returns (LibCoreFacet.GroupData memory)\\n    {\\n        LibCoreFacet.CoreState storage ds = LibCoreFacet.diamondStorage();\\n        return (ds.groupById[_groupId]);\\n    }\\n\\n    function getQuest(uint256 _questId)\\n        external\\n        view\\n        returns (LibCoreFacet.QuestData memory)\\n    {\\n        LibCoreFacet.CoreState storage ds = LibCoreFacet.diamondStorage();\\n        return (ds.questById[_questId]);\\n    }\\n\\n    function getUserEngagePoint(uint256 _groupId)\\n        external\\n        view\\n        returns (uint256)\\n    {\\n        LibCoreFacet.CoreState storage ds = LibCoreFacet.diamondStorage();\\n        return (ds.userEngagePoints[_groupId][msg.sender]);\\n    }\\n}\\n\",\"keccak256\":\"0x5f1a1f03d6239ba3f591237f218bee644309658cd050222bf911bdeae2b27f82\"},\"contracts/interfaces/IDiamond.sol\":{\"content\":\"// SPDX-License-Identifier: CC0-1.0\\npragma solidity ^0.8.0;\\n\\ninterface IDiamond {\\n    enum FacetCutAction {Add, Replace, Remove}\\n\\n    struct FacetCut {\\n        address facetAddress;\\n        FacetCutAction action;\\n        bytes4[] functionSelectors;\\n    }\\n\\n    event DiamondCut(FacetCut[] _diamondCut, address _init, bytes _calldata);\\n}\",\"keccak256\":\"0x6413d0039db7a28616080690068c892a169fc3714f4fecedcc9a7a2257c5c70b\",\"license\":\"CC0-1.0\"},\"contracts/interfaces/IDiamondCut.sol\":{\"content\":\"// SPDX-License-Identifier: CC0-1.0\\npragma solidity ^0.8.0;\\n\\nimport { IDiamond } from \\\"./IDiamond.sol\\\";\\n\\ninterface IDiamondCut is IDiamond {    \\n\\n    /// @notice Add/replace/remove any number of functions and optionally execute\\n    ///         a function with delegatecall\\n    /// @param _diamondCut Contains the facet addresses and function selectors\\n    /// @param _init The address of the contract or facet to execute _calldata\\n    /// @param _calldata A function call, including function selector and arguments\\n    ///                  _calldata is executed with delegatecall on _init\\n    function diamondCut(\\n        FacetCut[] calldata _diamondCut,\\n        address _init,\\n        bytes calldata _calldata\\n    ) external;    \\n}\\n\",\"keccak256\":\"0xa5f3f20b9392a935c6b9ba56d542cc0cc7bdf7089e1b9d5a764af0546ce40226\",\"license\":\"CC0-1.0\"},\"contracts/lib/LibCoreFacet.sol\":{\"content\":\"pragma solidity ^0.8.0;\\n\\nimport {Counters} from \\\"@openzeppelin/contracts/utils/Counters.sol\\\";\\n\\nlibrary LibCoreFacet {\\n    struct GroupData {\\n        bytes32 name;\\n        address owner;\\n    }\\n    struct QuestData {\\n        bytes32 name;\\n        uint256 groupId;\\n        uint256 engagePoints;\\n    }\\n\\n    using Counters for Counters.Counter;\\n    bytes32 constant DIAMOND_STORAGE_POSITION =\\n        keccak256(\\\"diamond.standard.diamond.storage.core\\\");\\n    struct CoreState {\\n        Counters.Counter groupIds;\\n        Counters.Counter questIds; // PolygonId Requests are the same 1 to 1\\n        mapping(uint256 => GroupData) groupById;\\n        mapping(uint256 => QuestData) questById;\\n        mapping(uint256 => mapping(address => bool)) isCompletedByUser; // with quest id\\n        mapping(uint256 => mapping(address => uint256)) userEngagePoints;\\n    }\\n\\n    function diamondStorage() internal pure returns (CoreState storage ds) {\\n        bytes32 position = DIAMOND_STORAGE_POSITION;\\n        assembly {\\n            ds.slot := position\\n        }\\n    }\\n\\n    function enforceGroupOwner(uint256 _groupId, address _owner) internal view {\\n        require(_groupId != 0, \\\"group id cannot be 0\\\");\\n        require(_owner != address(0), \\\"owner address cannot be 0\\\");\\n        require(\\n            diamondStorage().groupById[_groupId].owner == _owner,\\n            \\\"caller is not the owner of the group\\\"\\n        );\\n    }\\n\\n    function enforceOwnerOfQuest(uint256 _questId, address _owner)\\n        internal\\n        view\\n    {\\n        require(_owner != address(0), \\\"owner address cannot be 0\\\");\\n        require(\\n            diamondStorage()\\n                .groupById[diamondStorage().questById[_questId].groupId]\\n                .owner == _owner,\\n            \\\"caller is not the owner of the group\\\"\\n        );\\n    }\\n}\\n\",\"keccak256\":\"0xa4866628f74e3f0ee21eea5f5b1a35518054d60d377714a8d1f7edb6990fcb3e\"},\"contracts/lib/LibDiamond.sol\":{\"content\":\"// SPDX-License-Identifier: CC0-1.0\\npragma solidity ^0.8.0;\\n\\nimport {IDiamond} from \\\"../interfaces/IDiamond.sol\\\";\\nimport {IDiamondCut} from \\\"../interfaces/IDiamondCut.sol\\\";\\n\\nerror NoSelectorsGivenToAdd();\\nerror NotContractOwner(address _user, address _contractOwner);\\nerror NoSelectorsProvidedForFacetForCut(address _facetAddress);\\nerror CannotAddSelectorsToZeroAddress(bytes4[] _selectors);\\nerror NoBytecodeAtAddress(address _contractAddress, string _message);\\nerror IncorrectFacetCutAction(uint8 _action);\\nerror CannotAddFunctionToDiamondThatAlreadyExists(bytes4 _selector);\\nerror CannotReplaceFunctionsFromFacetWithZeroAddress(bytes4[] _selectors);\\nerror CannotReplaceImmutableFunction(bytes4 _selector);\\nerror CannotReplaceFunctionWithTheSameFunctionFromTheSameFacet(\\n    bytes4 _selector\\n);\\nerror CannotReplaceFunctionThatDoesNotExists(bytes4 _selector);\\nerror RemoveFacetAddressMustBeZeroAddress(address _facetAddress);\\nerror CannotRemoveFunctionThatDoesNotExist(bytes4 _selector);\\nerror CannotRemoveImmutableFunction(bytes4 _selector);\\nerror InitializationFunctionReverted(\\n    address _initializationContractAddress,\\n    bytes _calldata\\n);\\n\\nlibrary LibDiamond {\\n    bytes32 constant DIAMOND_STORAGE_POSITION =\\n        keccak256(\\\"droppinprotocol.com.diamond.storage\\\");\\n\\n    struct FacetAddressAndSelectorPosition {\\n        address facetAddress;\\n        uint16 selectorPosition;\\n    }\\n\\n    struct DiamondStorage {\\n        mapping(bytes4 => FacetAddressAndSelectorPosition) facetAddressAndSelectorPosition;\\n        bytes4[] selectors;\\n        mapping(bytes4 => bool) supportedInterfaces;\\n        address contractOwner;\\n    }\\n\\n    function diamondStorage()\\n        internal\\n        pure\\n        returns (DiamondStorage storage ds)\\n    {\\n        bytes32 position = DIAMOND_STORAGE_POSITION;\\n        assembly {\\n            ds.slot := position\\n        }\\n    }\\n\\n    event OwnershipTransferred(\\n        address indexed previousOwner,\\n        address indexed newOwner\\n    );\\n\\n    function setContractOwner(address _newOwner) internal {\\n        DiamondStorage storage ds = diamondStorage();\\n        address previousOwner = ds.contractOwner;\\n        ds.contractOwner = _newOwner;\\n        emit OwnershipTransferred(previousOwner, _newOwner);\\n    }\\n\\n    function contractOwner() internal view returns (address contractOwner_) {\\n        contractOwner_ = diamondStorage().contractOwner;\\n    }\\n\\n    function enforceIsContractOwner() internal view {\\n        if (msg.sender != diamondStorage().contractOwner) {\\n            revert NotContractOwner(msg.sender, diamondStorage().contractOwner);\\n        }\\n    }\\n\\n    event DiamondCut(\\n        IDiamondCut.FacetCut[] _diamondCut,\\n        address _init,\\n        bytes _calldata\\n    );\\n\\n    function diamondCut(\\n        IDiamondCut.FacetCut[] memory _diamondCut,\\n        address _init,\\n        bytes memory _calldata\\n    ) internal {\\n        for (\\n            uint256 facetIndex;\\n            facetIndex < _diamondCut.length;\\n            facetIndex++\\n        ) {\\n            bytes4[] memory functionSelectors = _diamondCut[facetIndex]\\n                .functionSelectors;\\n            address facetAddress = _diamondCut[facetIndex].facetAddress;\\n            if (functionSelectors.length == 0) {\\n                revert NoSelectorsProvidedForFacetForCut(facetAddress);\\n            }\\n            IDiamondCut.FacetCutAction action = _diamondCut[facetIndex].action;\\n            if (action == IDiamond.FacetCutAction.Add) {\\n                addFunctions(facetAddress, functionSelectors);\\n            } else if (action == IDiamond.FacetCutAction.Replace) {\\n                replaceFunctions(facetAddress, functionSelectors);\\n            } else if (action == IDiamond.FacetCutAction.Remove) {\\n                removeFunctions(facetAddress, functionSelectors);\\n            } else {\\n                revert IncorrectFacetCutAction(uint8(action));\\n            }\\n        }\\n        emit DiamondCut(_diamondCut, _init, _calldata);\\n        initializeDiamondCut(_init, _calldata);\\n    }\\n\\n    function addFunctions(\\n        address _facetAddress,\\n        bytes4[] memory _functionSelectors\\n    ) internal {\\n        if (_facetAddress == address(0)) {\\n            revert CannotAddSelectorsToZeroAddress(_functionSelectors);\\n        }\\n        DiamondStorage storage ds = diamondStorage();\\n        uint16 selectorCount = uint16(ds.selectors.length);\\n        enforceHasContractCode(\\n            _facetAddress,\\n            \\\"LibDiamondCut: Add facet has no code\\\"\\n        );\\n        for (\\n            uint256 selectorIndex;\\n            selectorIndex < _functionSelectors.length;\\n            selectorIndex++\\n        ) {\\n            bytes4 selector = _functionSelectors[selectorIndex];\\n            address oldFacetAddress = ds\\n                .facetAddressAndSelectorPosition[selector]\\n                .facetAddress;\\n            if (oldFacetAddress != address(0)) {\\n                revert CannotAddFunctionToDiamondThatAlreadyExists(selector);\\n            }\\n            ds.facetAddressAndSelectorPosition[\\n                    selector\\n                ] = FacetAddressAndSelectorPosition(\\n                _facetAddress,\\n                selectorCount\\n            );\\n            ds.selectors.push(selector);\\n            selectorCount++;\\n        }\\n    }\\n\\n    function replaceFunctions(\\n        address _facetAddress,\\n        bytes4[] memory _functionSelectors\\n    ) internal {\\n        DiamondStorage storage ds = diamondStorage();\\n        if (_facetAddress == address(0)) {\\n            revert CannotReplaceFunctionsFromFacetWithZeroAddress(\\n                _functionSelectors\\n            );\\n        }\\n        enforceHasContractCode(\\n            _facetAddress,\\n            \\\"LibDiamondCut: Replace facet has no code\\\"\\n        );\\n        for (\\n            uint256 selectorIndex;\\n            selectorIndex < _functionSelectors.length;\\n            selectorIndex++\\n        ) {\\n            bytes4 selector = _functionSelectors[selectorIndex];\\n            address oldFacetAddress = ds\\n                .facetAddressAndSelectorPosition[selector]\\n                .facetAddress;\\n            if (oldFacetAddress == address(this)) {\\n                revert CannotReplaceImmutableFunction(selector);\\n            }\\n            if (oldFacetAddress == _facetAddress) {\\n                revert CannotReplaceFunctionWithTheSameFunctionFromTheSameFacet(\\n                    selector\\n                );\\n            }\\n            if (oldFacetAddress == address(0)) {\\n                revert CannotReplaceFunctionThatDoesNotExists(selector);\\n            }\\n            ds\\n                .facetAddressAndSelectorPosition[selector]\\n                .facetAddress = _facetAddress;\\n        }\\n    }\\n\\n    function removeFunctions(\\n        address _facetAddress,\\n        bytes4[] memory _functionSelectors\\n    ) internal {\\n        DiamondStorage storage ds = diamondStorage();\\n        uint256 selectorCount = ds.selectors.length;\\n        if (_facetAddress != address(0)) {\\n            revert RemoveFacetAddressMustBeZeroAddress(_facetAddress);\\n        }\\n        for (\\n            uint256 selectorIndex;\\n            selectorIndex < _functionSelectors.length;\\n            selectorIndex++\\n        ) {\\n            bytes4 selector = _functionSelectors[selectorIndex];\\n            FacetAddressAndSelectorPosition\\n                memory oldFacetAddressAndSelectorPosition = ds\\n                    .facetAddressAndSelectorPosition[selector];\\n            if (oldFacetAddressAndSelectorPosition.facetAddress == address(0)) {\\n                revert CannotRemoveFunctionThatDoesNotExist(selector);\\n            }\\n\\n            if (\\n                oldFacetAddressAndSelectorPosition.facetAddress == address(this)\\n            ) {\\n                revert CannotRemoveImmutableFunction(selector);\\n            }\\n            selectorCount--;\\n            if (\\n                oldFacetAddressAndSelectorPosition.selectorPosition !=\\n                selectorCount\\n            ) {\\n                bytes4 lastSelector = ds.selectors[selectorCount];\\n                ds.selectors[\\n                    oldFacetAddressAndSelectorPosition.selectorPosition\\n                ] = lastSelector;\\n                ds\\n                    .facetAddressAndSelectorPosition[lastSelector]\\n                    .selectorPosition = oldFacetAddressAndSelectorPosition\\n                    .selectorPosition;\\n            }\\n            ds.selectors.pop();\\n            delete ds.facetAddressAndSelectorPosition[selector];\\n        }\\n    }\\n\\n    function initializeDiamondCut(address _init, bytes memory _calldata)\\n        internal\\n    {\\n        if (_init == address(0)) {\\n            return;\\n        }\\n        enforceHasContractCode(\\n            _init,\\n            \\\"LibDiamondCut: _init address has no code\\\"\\n        );\\n        (bool success, bytes memory error) = _init.delegatecall(_calldata);\\n        if (!success) {\\n            if (error.length > 0) {\\n                assembly {\\n                    let returndata_size := mload(error)\\n                    revert(add(32, error), returndata_size)\\n                }\\n            } else {\\n                revert InitializationFunctionReverted(_init, _calldata);\\n            }\\n        }\\n    }\\n\\n    function enforceHasContractCode(\\n        address _contract,\\n        string memory _errorMessage\\n    ) internal view {\\n        uint256 contractSize;\\n        assembly {\\n            contractSize := extcodesize(_contract)\\n        }\\n        if (contractSize == 0) {\\n            revert NoBytecodeAtAddress(_contract, _errorMessage);\\n        }\\n    }\\n}\\n\",\"keccak256\":\"0x494495a7df3f5b0710524029b6dd1d3231f206ba1df06cedb433644f8671c843\",\"license\":\"CC0-1.0\"}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b50610803806100206000396000f3fe608060405234801561001057600080fd5b506004361061007d5760003560e01c806379c4d03c1161005b57806379c4d03c1461018e5780637b4eaf6f146101a15780638f12c196146101b4578063ceb60654146101c757600080fd5b806306a414071461008257806349f86f34146100df578063528be0a914610179575b600080fd5b6100cc6100903660046106bf565b60009081527f7c7557f95a2f97ba23b20056e448af54f71e639e66ae0b4d106fd6235e42a90e6020908152604080832033845290915290205490565b6040519081526020015b60405180910390f35b6101576100ed3660046106bf565b6040805160608082018352600080835260208084018290529284018190529384527f7c7557f95a2f97ba23b20056e448af54f71e639e66ae0b4d106fd6235e42a90c8252928290208251938401835280548452600181015491840191909152600201549082015290565b60408051825181526020808401519082015291810151908201526060016100d6565b61018c6101873660046106bf565b61025c565b005b61018c61019c3660046106d8565b610373565b61018c6101af36600461071d565b6103c1565b61018c6101c23660046106bf565b6104ea565b6102386101d53660046106bf565b604080518082018252600080825260209182018190529283527f7c7557f95a2f97ba23b20056e448af54f71e639e66ae0b4d106fd6235e42a90b815291819020815180830190925280548252600101546001600160a01b03169181019190915290565b60408051825181526020928301516001600160a01b031692810192909252016100d6565b60008181527f7c7557f95a2f97ba23b20056e448af54f71e639e66ae0b4d106fd6235e42a90d602090815260408083203384529091529020546000805160206107ae8339815191529060ff16156103085760405162461bcd60e51b815260206004820152602560248201527f757365722068617320616c726561647920636f6d706c657465642074686973206044820152641c5d595cdd60da1b60648201526084015b60405180910390fd5b6000828152600482016020908152604080832033808552908352818420805460ff19166001908117909155868552600386018452828520600281015491015485526005860184528285209185529252822080549192909161036a908490610787565b90915550505050565b6000805160206107ae83398151915261038c8433610587565b6000938452600201602052604090922090815560010180546001600160a01b0319166001600160a01b03909216919091179055565b60208101516000805160206107ae833981519152906103e09033610587565b6103f08160010180546001019055565b8151600382016000610403600185015490565b815260200190815260200160002060000181905550816020015181600301600061042e846001015490565b8152602001908152602001600020600101819055508160400151816003016000610459846001015490565b8152602001908152602001600020600201819055507fd8e19b4f7b6c9d58a4c817a52690f5d13ec63b7a15c533e3a00f31a4bdb222478160030160006104a0846001015490565b81526020019081526020016000206104b9836001015490565b6040805183548152600184015460208201526002909301549083015260608201526080015b60405180910390a15050565b6000805160206107ae8339815191528054600190810180835560009081527f7c7557f95a2f97ba23b20056e448af54f71e639e66ae0b4d106fd6235e42a90b60209081526040808320869055845483529182902090920180546001600160a01b0319163390811790915583548251908152928301527f6958b51b54d963fa8eeeea5b61b83a9ad28f9ee9d5a2f1b8495e6866cb534bb191016104de565b816000036105ce5760405162461bcd60e51b8152602060048201526014602482015273067726f75702069642063616e6e6f7420626520360641b60448201526064016102ff565b6001600160a01b0381166106245760405162461bcd60e51b815260206004820152601960248201527f6f776e657220616464726573732063616e6e6f7420626520300000000000000060448201526064016102ff565b60008281527f7c7557f95a2f97ba23b20056e448af54f71e639e66ae0b4d106fd6235e42a90b60205260409020600101546001600160a01b038281169116146106bb5760405162461bcd60e51b8152602060048201526024808201527f63616c6c6572206973206e6f7420746865206f776e6572206f662074686520676044820152630726f75760e41b60648201526084016102ff565b5050565b6000602082840312156106d157600080fd5b5035919050565b6000806000606084860312156106ed57600080fd5b833592506020840135915060408401356001600160a01b038116811461071257600080fd5b809150509250925092565b60006060828403121561072f57600080fd5b6040516060810181811067ffffffffffffffff8211171561076057634e487b7160e01b600052604160045260246000fd5b80604052508235815260208301356020820152604083013560408201528091505092915050565b600082198211156107a857634e487b7160e01b600052601160045260246000fd5b50019056fe7c7557f95a2f97ba23b20056e448af54f71e639e66ae0b4d106fd6235e42a909a2646970667358221220932d5aabdc2329ecdd914e3af93ab4226462a3064bb30c39e5eaba42b1c01dbc64736f6c634300080d0033",
+  "deployedBytecode": "0x608060405234801561001057600080fd5b506004361061007d5760003560e01c806379c4d03c1161005b57806379c4d03c1461018e5780637b4eaf6f146101a15780638f12c196146101b4578063ceb60654146101c757600080fd5b806306a414071461008257806349f86f34146100df578063528be0a914610179575b600080fd5b6100cc6100903660046106bf565b60009081527f7c7557f95a2f97ba23b20056e448af54f71e639e66ae0b4d106fd6235e42a90e6020908152604080832033845290915290205490565b6040519081526020015b60405180910390f35b6101576100ed3660046106bf565b6040805160608082018352600080835260208084018290529284018190529384527f7c7557f95a2f97ba23b20056e448af54f71e639e66ae0b4d106fd6235e42a90c8252928290208251938401835280548452600181015491840191909152600201549082015290565b60408051825181526020808401519082015291810151908201526060016100d6565b61018c6101873660046106bf565b61025c565b005b61018c61019c3660046106d8565b610373565b61018c6101af36600461071d565b6103c1565b61018c6101c23660046106bf565b6104ea565b6102386101d53660046106bf565b604080518082018252600080825260209182018190529283527f7c7557f95a2f97ba23b20056e448af54f71e639e66ae0b4d106fd6235e42a90b815291819020815180830190925280548252600101546001600160a01b03169181019190915290565b60408051825181526020928301516001600160a01b031692810192909252016100d6565b60008181527f7c7557f95a2f97ba23b20056e448af54f71e639e66ae0b4d106fd6235e42a90d602090815260408083203384529091529020546000805160206107ae8339815191529060ff16156103085760405162461bcd60e51b815260206004820152602560248201527f757365722068617320616c726561647920636f6d706c657465642074686973206044820152641c5d595cdd60da1b60648201526084015b60405180910390fd5b6000828152600482016020908152604080832033808552908352818420805460ff19166001908117909155868552600386018452828520600281015491015485526005860184528285209185529252822080549192909161036a908490610787565b90915550505050565b6000805160206107ae83398151915261038c8433610587565b6000938452600201602052604090922090815560010180546001600160a01b0319166001600160a01b03909216919091179055565b60208101516000805160206107ae833981519152906103e09033610587565b6103f08160010180546001019055565b8151600382016000610403600185015490565b815260200190815260200160002060000181905550816020015181600301600061042e846001015490565b8152602001908152602001600020600101819055508160400151816003016000610459846001015490565b8152602001908152602001600020600201819055507fd8e19b4f7b6c9d58a4c817a52690f5d13ec63b7a15c533e3a00f31a4bdb222478160030160006104a0846001015490565b81526020019081526020016000206104b9836001015490565b6040805183548152600184015460208201526002909301549083015260608201526080015b60405180910390a15050565b6000805160206107ae8339815191528054600190810180835560009081527f7c7557f95a2f97ba23b20056e448af54f71e639e66ae0b4d106fd6235e42a90b60209081526040808320869055845483529182902090920180546001600160a01b0319163390811790915583548251908152928301527f6958b51b54d963fa8eeeea5b61b83a9ad28f9ee9d5a2f1b8495e6866cb534bb191016104de565b816000036105ce5760405162461bcd60e51b8152602060048201526014602482015273067726f75702069642063616e6e6f7420626520360641b60448201526064016102ff565b6001600160a01b0381166106245760405162461bcd60e51b815260206004820152601960248201527f6f776e657220616464726573732063616e6e6f7420626520300000000000000060448201526064016102ff565b60008281527f7c7557f95a2f97ba23b20056e448af54f71e639e66ae0b4d106fd6235e42a90b60205260409020600101546001600160a01b038281169116146106bb5760405162461bcd60e51b8152602060048201526024808201527f63616c6c6572206973206e6f7420746865206f776e6572206f662074686520676044820152630726f75760e41b60648201526084016102ff565b5050565b6000602082840312156106d157600080fd5b5035919050565b6000806000606084860312156106ed57600080fd5b833592506020840135915060408401356001600160a01b038116811461071257600080fd5b809150509250925092565b60006060828403121561072f57600080fd5b6040516060810181811067ffffffffffffffff8211171561076057634e487b7160e01b600052604160045260246000fd5b80604052508235815260208301356020820152604083013560408201528091505092915050565b600082198211156107a857634e487b7160e01b600052601160045260246000fd5b50019056fe7c7557f95a2f97ba23b20056e448af54f71e639e66ae0b4d106fd6235e42a909a2646970667358221220932d5aabdc2329ecdd914e3af93ab4226462a3064bb30c39e5eaba42b1c01dbc64736f6c634300080d0033",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {},
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  },
+  "storageLayout": {
+    "storage": [],
+    "types": null
+  }
+}

@@ -10,6 +10,8 @@ contract BadgeFacet {
     using Counters for Counters.Counter;
     using SafeMath for uint256;
 
+    event BadgeCreated(LibBadgeFacet.BadgeData badgeData,string nftSymbol, string nftInitBaseURI,uint256 id);
+
     function addBadge(
         LibBadgeFacet.BadgeData memory _badgeData,
         string calldata _nftSymbol,
@@ -21,7 +23,7 @@ contract BadgeFacet {
         LibCoreFacet.enforceGroupOwner(_badgeData.groupId, msg.sender);
         uint256[3] memory requiredQuests;
         for (uint256 i = 0; i < _badgeData.requiredQuests.length; i++) {
-            if (_badgeData.requiredQuests[i] != 0) {
+            if (_badgeData.requiredQuests[i] > 0) {
                 LibCoreFacet.enforceOwnerOfQuest(
                     _badgeData.requiredQuests[i],
                     msg.sender
@@ -44,6 +46,8 @@ contract BadgeFacet {
         if (mainBadgeOfGroup == 0) {
             ds.mainBadgeOfGroup[_badgeData.groupId] = ds.badgeIds.current();
         }
+
+        emit BadgeCreated(ds.badgesById[ds.badgeIds.current()], _nftSymbol,_nftInitBaseURI,ds.badgeIds.current());
     }
 
     //TODO

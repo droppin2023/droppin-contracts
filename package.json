@@ -1,7 +1,7 @@
 {
-  "name": "hardhat-deployer",
+  "name": "droppin-contracts",
   "version": "0.1.2",
-  "description": "A hardhat Deployer",
+  "description": "Contracts for Droppin protocol",
   "main": "index.js",
   "scripts": {
     "deploy": "npx hardhat deploy",

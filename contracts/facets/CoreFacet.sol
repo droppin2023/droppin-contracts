@@ -9,14 +9,16 @@ import {SafeMath} from "@openzeppelin/contracts/utils/math/SafeMath.sol";
 contract CoreFacet {
     using Counters for Counters.Counter;
     using SafeMath for uint256;
-    event groupCreated(uint256 _id, address _creator);
 
+    event GroupCreated(uint256 id, address creator);
+    event QuestCreated(LibCoreFacet.QuestData questData, uint256 id);
     function createGroup(bytes32 name) external {
         LibCoreFacet.CoreState storage ds = LibCoreFacet.diamondStorage();
         ds.groupIds.increment();
         ds.groupById[ds.groupIds.current()].name = name;
         ds.groupById[ds.groupIds.current()].owner = msg.sender;
-    }
+        emit GroupCreated(ds.groupIds.current(), msg.sender);
+    }   
 
     function addQuest(LibCoreFacet.QuestData memory _questData) external {
         LibCoreFacet.CoreState storage ds = LibCoreFacet.diamondStorage();
@@ -26,6 +28,7 @@ contract CoreFacet {
         ds.questById[ds.questIds.current()].groupId = _questData.groupId;
         ds.questById[ds.questIds.current()].engagePoints = _questData
             .engagePoints;
+        emit QuestCreated(ds.questById[ds.questIds.current()], ds.questIds.current());
     }
 
     function modifyGroup(
