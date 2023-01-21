@@ -22,7 +22,7 @@ contract CoreFacet {
 
     function addQuest(LibCoreFacet.QuestData memory _questData) external {
         LibCoreFacet.CoreState storage ds = LibCoreFacet.diamondStorage();
-        LibCoreFacet.enforceGroupOwner(_questData.groupId, msg.sender);
+        // LibCoreFacet.enforceGroupOwner(_questData.groupId, msg.sender);
         ds.questIds.increment();
         ds.questById[ds.questIds.current()].name = _questData.name;
         ds.questById[ds.questIds.current()].groupId = _questData.groupId;

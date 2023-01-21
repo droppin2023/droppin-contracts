@@ -2,7 +2,11 @@ require("hardhat");
 // const { utils } = require("ethers");
 const { ethers, getNamedAccounts } = require("hardhat");
 // const { parseUnits, formatUnits } = require("ethers").utils;
-const { FacetCutAction, getSelectors } = require("../utils/helpers");
+const {
+  FacetCutAction,
+  getSelectors,
+  isLocalHost,
+} = require("../utils/helpers");
 const {
   deployWithConfirmation,
   withConfirmation,
@@ -94,54 +98,48 @@ const deployAll = async () => {
   for (const event of receipt.logs) {
     try {
       const parsedLog = cCoreFacetProxy.interface.parseLog(event);
-      //   console.log(parsedLog);
       if (parsedLog && parsedLog.name === "GroupCreated") {
         groupCreatedEvent = parsedLog;
         break;
       }
     } catch (e) {}
   }
-
   // add quests
   const questsToAdd = [
     {
       name: formatBytes32String("Quest1"),
       groupId: 1,
       engagePoints: 750,
-      owner: sDeployer,
     },
     {
       name: formatBytes32String("Quest2"),
       groupId: 1,
       engagePoints: 2000,
-      owner: sDeployer,
     },
     {
       name: formatBytes32String("Quest3"),
       groupId: 1,
       engagePoints: 500,
-      owner: sDeployer,
     },
     {
       name: formatBytes32String("Quest4"),
       groupId: 1,
       engagePoints: 100,
-      owner: sDeployer,
     },
     {
       name: formatBytes32String("Quest5"),
       groupId: 1,
       engagePoints: 150,
-      owner: sDeployer,
     },
   ];
-
-  questsToAdd.forEach(async (item,id) => {
-    const tx = await cCoreFacetProxy.connect(item.owner).addQuest(item);
+  for (let i = 1; i < questsToAdd.length; i++) {
+    console.log("Adding Quest %d : ", i + 1);
+    const tx = await cCoreFacetProxy.addQuest(questsToAdd[i - 1], {
+      gasLimit: 500000,
+    });
     const receipt = await tx.wait();
-    console.log("Create Quest %d : ", id+1, receipt.transactionHash);
-  });
-
+    console.log("Create Quest %d : ", i + 1, receipt.transactionHash);
+  }
   const badgeData = {
     requiredQuests: [1, 4, 0],
     engagePointsThreshold: 1000,
@@ -170,5 +168,5 @@ const main = async () => {
 };
 
 main.id = "001_core";
-main.skip = () => false;
+main.skip = () => isLocalHost;
 module.exports = main;
