@@ -62,7 +62,6 @@ module.exports = {
         process.env.DEPLOYER_PRIVATE_KEY || privateKeys[2],
         process.env.GOVERNOR_PRIVATE_KEY || privateKeys[1],
       ],
-      saveDeployments: false,
       chainId: 1337,
       timeout: 6000000,
     },
