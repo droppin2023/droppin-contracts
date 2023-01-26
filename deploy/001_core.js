@@ -34,5 +34,5 @@ const main = async () => {
 };
 
 main.id = "001_core";
-main.skip = () => !isLocalHost;
+main.skip = () => false;
 module.exports = main;

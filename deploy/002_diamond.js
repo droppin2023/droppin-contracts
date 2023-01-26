@@ -83,6 +83,12 @@ const deployAll = async () => {
     )
   );
 
+  const cOwnershipProxy = await ethers.getContractAt(
+    "OwnershipFacet",
+    dDroppin.address
+  );
+  console.log("CONTRACT OWNER: ", await cOwnershipProxy.owner());
+
   // scripts for testing on backend
   const cCoreFacetProxy = await ethers.getContractAt(
     "CoreFacet",
@@ -168,5 +174,5 @@ const main = async () => {
 };
 
 main.id = "001_core";
-main.skip = () => isLocalHost;
+main.skip = () => false;
 module.exports = main;

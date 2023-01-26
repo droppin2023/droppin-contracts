@@ -12,6 +12,8 @@ contract CoreFacet {
 
     event GroupCreated(uint256 id, address creator);
     event QuestCreated(LibCoreFacet.QuestData questData, uint256 id);
+    event GroupModified(uint256 id, address newOwner);
+    event QuestComplete(uint256 groupId, address userAddr, uint256 engageScore);
     function createGroup(bytes32 name) external {
         LibCoreFacet.CoreState storage ds = LibCoreFacet.diamondStorage();
         ds.groupIds.increment();
@@ -40,19 +42,23 @@ contract CoreFacet {
         LibCoreFacet.enforceGroupOwner(_groupId, msg.sender);
         ds.groupById[_groupId].name = _newName;
         ds.groupById[_groupId].owner = _newOwner;
+        emit GroupModified(_groupId, _newOwner);
     }
 
-    function completeQuest(uint256 _questId) external {
-        //todo use verification from polygon id
+    // droppin server is the only allowed to call this. 
+    function completeQuest(uint256 _questId, address userAddr) external {
+        LibDiamond.enforceIsContractOwner();
+
         LibCoreFacet.CoreState storage ds = LibCoreFacet.diamondStorage();
         require(
-            ds.isCompletedByUser[_questId][msg.sender] == false,
+            ds.isCompletedByUser[_questId][userAddr] == false,
             "user has already completed this quest"
         );
-        ds.isCompletedByUser[_questId][msg.sender] = true;
-        ds.userEngagePoints[ds.questById[_questId].groupId][msg.sender] += (
+        ds.isCompletedByUser[_questId][userAddr] = true;
+        ds.userEngagePoints[ds.questById[_questId].groupId][userAddr] += (
             ds.questById[_questId].engagePoints
         );
+        emit QuestComplete(ds.questById[_questId].groupId,userAddr, ds.questById[_questId].engagePoints);
     }
 
     function getGroup(uint256 _groupId)
