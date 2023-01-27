@@ -47,7 +47,7 @@ contract CoreFacet {
 
     // droppin server is the only allowed to call this. 
     function completeQuest(uint256 _questId, address userAddr) external {
-        LibDiamond.enforceIsContractOwner();
+        // LibDiamond.enforceIsContractOwner();
 
         LibCoreFacet.CoreState storage ds = LibCoreFacet.diamondStorage();
         require(

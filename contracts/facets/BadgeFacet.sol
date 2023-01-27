@@ -11,6 +11,7 @@ contract BadgeFacet {
     using SafeMath for uint256;
 
     event BadgeCreated(LibBadgeFacet.BadgeData badgeData,string nftSymbol, string nftInitBaseURI,uint256 id);
+    event BadgeClaimed(LibBadgeFacet.BadgeData badgeData, address userAddr, uint256 id);
 
     function addBadge(
         LibBadgeFacet.BadgeData memory _badgeData,
@@ -84,6 +85,7 @@ contract BadgeFacet {
             );
         }
         NFTBadge(ds.badgesById[_badgeId].NFT).mint(msg.sender);
+        emit BadgeClaimed(ds.badgesById[_badgeId],msg.sender, _badgeId);
     }
 
     function isMemberOfGroup(uint256 _groupId) external view returns (bool) {

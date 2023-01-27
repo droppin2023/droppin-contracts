@@ -148,7 +148,7 @@ const deployAll = async () => {
   }
   const badgeData = {
     requiredQuests: [1, 4, 0],
-    engagePointsThreshold: 1000,
+    engagePointsThreshold: 500,
     badgePrice: parseEther("0.01"),
     name: "Hacker Badge",
     NFT: ethers.constants.AddressZero,
@@ -167,6 +167,16 @@ const deployAll = async () => {
     .addBadge(badgeData, badgeData.symbol, badgeData.URI);
   receipt = await tx.wait();
   console.log("Create badge Tx : ", receipt.transactionHash);
+
+  // user completes the quests required
+  tx = await cCoreFacetProxy.completeQuest(1, sDeployer.address);
+  await tx.wait();
+  tx = await cCoreFacetProxy.completeQuest(4, sDeployer.address);
+  await tx.wait();
+
+  tx = await cBadgeFacetProxy.claimBadge(1, { value: parseEther("0.01") });
+  receipt = await tx.wait();
+  console.log("Claim badge tx: ", receipt.transactionHash);
 };
 
 const main = async () => {
