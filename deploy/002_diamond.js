@@ -169,14 +169,14 @@ const deployAll = async () => {
   console.log("Create badge Tx : ", receipt.transactionHash);
 
   // user completes the quests required
-  tx = await cCoreFacetProxy.completeQuest(1, sDeployer.address);
-  await tx.wait();
-  tx = await cCoreFacetProxy.completeQuest(4, sDeployer.address);
-  await tx.wait();
+  // tx = await cCoreFacetProxy.completeQuest(1, sDeployer.address);
+  // await tx.wait();
+  // tx = await cCoreFacetProxy.completeQuest(4, sDeployer.address);
+  // await tx.wait();
 
-  tx = await cBadgeFacetProxy.claimBadge(1, { value: parseEther("0.01") });
-  receipt = await tx.wait();
-  console.log("Claim badge tx: ", receipt.transactionHash);
+  // tx = await cBadgeFacetProxy.claimBadge(1, { value: parseEther("0.01") });
+  // receipt = await tx.wait();
+  // console.log("Claim badge tx: ", receipt.transactionHash);
 };
 
 const main = async () => {
