@@ -1,13 +1,14 @@
 const { createFixtureLoader } = require("ethereum-waffle");
 const hre = require("hardhat");
 const { addresses } = require("../utils/addresses");
+const axios = require("axios");
 const forkedNetwork = process.env.NETWORK;
 const isPolygon = hre.network.name === "polygon" || forkedNetwork === "polygon";
 const isMainnet = hre.network.name === "mainnet" || forkedNetwork === "mainnet";
 const isLocalHost = hre.network.name === "hardhat";
 console.log(hre.network.name);
 const isFork = hre.network.name === "localhost";
-
+const SERVER_URL = process.env.SERVER_URL;
 const circuitId = "credentialAtomicQuerySig";
 const validatorAddresss = "0xb1e86C4c687B85520eF4fd2a0d14e81970a15aFB";
 
@@ -106,7 +107,9 @@ function getSelector(func) {
   const abiInterface = new hre.ethers.utils.Interface([func]);
   return abiInterface.getSighash(hre.ethers.utils.Fragment.from(func));
 }
-
+async function callToServer(method, params) {
+  await axios.post(`${SERVER_URL}/${method}`, params);
+}
 module.exports = {
   getTokenAddresses,
   isPolygon,
@@ -121,4 +124,5 @@ module.exports = {
   circuitId,
   FacetCutAction,
   getSelectors,
+  callToServer,
 };

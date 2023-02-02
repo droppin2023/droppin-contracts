@@ -58,10 +58,10 @@ module.exports = {
     },
     localhost: {
       url: "http://127.0.0.1:8545/",
-      accounts: [
-        process.env.DEPLOYER_PRIVATE_KEY || privateKeys[2],
-        process.env.GOVERNOR_PRIVATE_KEY || privateKeys[1],
-      ],
+      // accounts: [
+      //   process.env.DEPLOYER_PRIVATE_KEY || privateKeys[2],
+      //   process.env.GOVERNOR_PRIVATE_KEY || privateKeys[1],
+      // ],
       chainId: 1337,
       timeout: 6000000,
     },
