@@ -108,6 +108,45 @@ const BADGE3 = {
     "A club for the professorial clothed y00ts. Our vision is to engage college campus communities across the globe in the y00ts ecosystem.",
 };
 
+const FAKE_USERS = [
+  {
+    username: "metalboyrick1",
+    name: "Rick1",
+    description: "dummy",
+    image: "none",
+    discord: {
+      id: "none",
+      username: "none",
+      discriminator: "none",
+    },
+    twitter: "none",
+  },
+
+  {
+    username: "metalboyrick2",
+    name: "Rick2",
+    description: "dummy",
+    image: "none",
+    discord: {
+      id: "none",
+      username: "none",
+      discriminator: "none",
+    },
+    twitter: "none",
+  },
+  {
+    username: "metalboyrick3",
+    name: "Rick3",
+    description: "dummy",
+    image: "none",
+    discord: {
+      id: "none",
+      username: "none",
+      discriminator: "none",
+    },
+    twitter: "none",
+  },
+];
 // import
 const deployAll = async () => {
   const { deployerAddr, governorAddr } = await getNamedAccounts();
@@ -240,13 +279,11 @@ const deployAll = async () => {
   badgeData.transactionHash = receipt.transactionHash;
   await callToServer("create-badge", badgeData);
 
-  console.log("done here")
   tx = await cBadgeFacetProxy.addBadge(BADGE2, BADGE2.symbol, BADGE2.URI);
   receipt = await tx.wait();
   badgeData = BADGE2;
   badgeData.transactionHash = receipt.transactionHash;
   await callToServer("create-badge", badgeData);
-  console.log("done here2")
 
   tx = await cBadgeFacetProxy.addBadge(BADGE3, BADGE3.symbol, BADGE3.URI);
   receipt = await tx.wait();
@@ -254,6 +291,35 @@ const deployAll = async () => {
   badgeData.transactionHash = receipt.transactionHash;
   await callToServer("create-badge", badgeData);
 
+  // ---------REGISTER OTHER FAKE USERS
+  const signers = await ethers.getSigners();
+
+  for (let i = 0; i < FAKE_USERS.length; i++) {
+    const userData = FAKE_USERS[i];
+    userData.address = signers[2 + i].address;
+    await callToServer("sign-up", userData);
+  }
+
+  // ---------COMPLETE QUEST FOR USERS
+
+  for (let i = 0; i < FAKE_USERS.length; i++) {
+    await callToServer("complete-quest", {
+      questId: 1,
+      username: FAKE_USERS[i].username,
+    });
+    await callToServer("complete-quest", {
+      questId: 2,
+      username: FAKE_USERS[i].username,
+    });
+  }
+  // ---------CLAIM BADGE FOR USERS
+  for (let i = 0; i < FAKE_USERS.length; i++) {
+    tx = await cBadgeFacetProxy.connect(signers[i + 2]).claimBadge(1);
+    receipt = await tx.wait();
+    await callToServer("complete-badge", {
+      transactionHash: receipt.transactionHash,
+    });
+  }
   return;
   const questsToAdd = [
     {
