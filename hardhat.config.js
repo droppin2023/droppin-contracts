@@ -82,7 +82,7 @@ module.exports = {
       chainId: 0xafcee83030b95,
     },
     polygonMumbai: {
-      url: `${process.env.MUMBAI_PROVIDER_URL}`,
+      url: `${process.env.QUICKNODE_MUMBAI_RPC}`,
       accounts: [
         process.env.DEPLOYER_PRIVATE_KEY || privateKeys[2],
         process.env.GOVERNOR_PRIVATE_KEY || privateKeys[1],

@@ -174,6 +174,8 @@ const deployAll = async () => {
     init: cDiamondInit.address,
     initCalldata: functionCall,
   };
+  console.log(facetCuts[0].functionSelectors, facetCuts[1].functionSelectors, facetCuts[2].functionSelectors)
+  console.log({facetCuts, diamondArgs})
   const dDroppin = await deployWithConfirmation(`DroppinDiamond`, [
     facetCuts,
     diamondArgs,
