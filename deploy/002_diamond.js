@@ -174,8 +174,8 @@ const deployAll = async () => {
     init: cDiamondInit.address,
     initCalldata: functionCall,
   };
-  console.log(facetCuts[0].functionSelectors, facetCuts[1].functionSelectors, facetCuts[2].functionSelectors)
-  console.log({facetCuts, diamondArgs})
+  // console.log(facetCuts[0].functionSelectors, facetCuts[1].functionSelectors, facetCuts[2].functionSelectors)
+  // console.log({facetCuts, diamondArgs})
   const dDroppin = await deployWithConfirmation(`DroppinDiamond`, [
     facetCuts,
     diamondArgs,
@@ -241,7 +241,7 @@ const deployAll = async () => {
   // DEV // SCRIPTS FOR DEMO
   // ----------- REGISTER USER
   USER1_DETAIL.address = deployerAddr;
-  await callToServer("sign-up", USER1_DETAIL);
+  // await callToServer("sign-up", USER1_DETAIL);
 
   // ----------- CREATE A GROUP
   let tx = await cCoreFacetProxy
@@ -250,7 +250,7 @@ const deployAll = async () => {
   let receipt = await tx.wait();
   const groupData = GROUP1;
   groupData.transactionHash = receipt.transactionHash;
-  await callToServer("create-group", groupData);
+  // await callToServer("create-group", groupData);
 
   // ----------- ADD QUEST
 
@@ -262,7 +262,7 @@ const deployAll = async () => {
   receipt = await tx.wait();
   let questData = QUEST1;
   questData.transactionHash = receipt.transactionHash;
-  await callToServer("create-quest", questData);
+  // await callToServer("create-quest", questData);
 
   tx = await cCoreFacetProxy.addQuest({
     name: formatBytes32String(QUEST2.name),
@@ -272,26 +272,26 @@ const deployAll = async () => {
   receipt = await tx.wait();
   questData = QUEST2;
   questData.transactionHash = receipt.transactionHash;
-  await callToServer("create-quest", questData);
+  // await callToServer("create-quest", questData);
 
   // ---------CREATE BADGE
   tx = await cBadgeFacetProxy.addBadge(BADGE1, BADGE1.symbol, BADGE1.URI);
   receipt = await tx.wait();
   let badgeData = BADGE1;
   badgeData.transactionHash = receipt.transactionHash;
-  await callToServer("create-badge", badgeData);
+  // await callToServer("create-badge", badgeData);
 
   tx = await cBadgeFacetProxy.addBadge(BADGE2, BADGE2.symbol, BADGE2.URI);
   receipt = await tx.wait();
   badgeData = BADGE2;
   badgeData.transactionHash = receipt.transactionHash;
-  await callToServer("create-badge", badgeData);
+  // await callToServer("create-badge", badgeData);
 
   tx = await cBadgeFacetProxy.addBadge(BADGE3, BADGE3.symbol, BADGE3.URI);
   receipt = await tx.wait();
   badgeData = BADGE3;
   badgeData.transactionHash = receipt.transactionHash;
-  await callToServer("create-badge", badgeData);
+  // await callToServer("create-badge", badgeData);
 
   // ---------REGISTER OTHER FAKE USERS
   const signers = await ethers.getSigners();
@@ -299,28 +299,34 @@ const deployAll = async () => {
   for (let i = 0; i < FAKE_USERS.length; i++) {
     const userData = FAKE_USERS[i];
     userData.address = signers[2 + i].address;
-    await callToServer("sign-up", userData);
+    // await callToServer("sign-up", userData);
   }
 
   // ---------COMPLETE QUEST FOR USERS
 
   for (let i = 0; i < FAKE_USERS.length; i++) {
-    await callToServer("complete-quest", {
-      questId: 1,
-      username: FAKE_USERS[i].username,
-    });
-    await callToServer("complete-quest", {
-      questId: 2,
-      username: FAKE_USERS[i].username,
-    });
+    // await callToServer("complete-quest", {
+    //   questId: 1,
+    //   username: FAKE_USERS[i].username,
+    // });
+    let tx = await cCoreFacetProxy.completeQuest(1, signers[2 + i].address);
+    await tx.wait();
+    // await callToServer("complete-quest", {
+    //   questId: 2,
+    //   username: FAKE_USERS[i].username,
+    // });
+    tx = await cCoreFacetProxy.completeQuest(2, signers[2 + i].address);
+    await tx.wait();
   }
+  tx = await cCoreFacetProxy.completeQuest(1, signers[19].address);
+  await tx.wait();
   // ---------CLAIM BADGE FOR USERS
   for (let i = 0; i < FAKE_USERS.length; i++) {
     tx = await cBadgeFacetProxy.connect(signers[i + 2]).claimBadge(1);
     receipt = await tx.wait();
-    await callToServer("complete-badge", {
-      transactionHash: receipt.transactionHash,
-    });
+    // await callToServer("complete-badge", {
+    //   transactionHash: receipt.transactionHash,
+    // });
   }
   return;
   const questsToAdd = [
