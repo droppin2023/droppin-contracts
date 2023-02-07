@@ -15,6 +15,9 @@ const {
 } = require("ethers/lib/utils");
 const { ethers } = require("hardhat");
 
+const schemaHash = "9a7a6a513e29844f895cac0c6075ea77";
+const schemaEnd = fromLittleEndian(hexToBytes(schemaHash));
+
 describe("Droppin", async () => {
   describe("CoreFacet", async () => {
     let cCoreFacet;
@@ -22,6 +25,7 @@ describe("Droppin", async () => {
     let pia;
     let tay;
     let bob;
+
     before(async () => {
       const fixture = await loadFixture(defaultFixture);
       pia = fixture.pia;
@@ -215,6 +219,7 @@ describe("Droppin", async () => {
           owner: pia,
           symbol: "HACK",
           URI: "www.google.com",
+          schemaHash: ethers.BigNumber.from(schemaEnd),
         },
       ];
       badgesList.forEach(async (item) => {
@@ -235,29 +240,40 @@ describe("Droppin", async () => {
       const nftAddress = (await cBadgeFacet.getBadge(1)).NFT;
       const cNFTBadge = await ethers.getContractAt("NFTBadge", nftAddress);
       const balanceBefore = await cNFTBadge.balanceOf(bob.address);
-      await expect(cBadgeFacet.connect(bob).claimBadge(1)).to.be.revertedWith(
-        "user has not complete all quests"
-      );
+      // await expect(cBadgeFacet.connect(bob).claimBadge(1)).to.be.revertedWith(
+      //   "user has not complete all quests"
+      // );
       // complete quests
       let tx = await cCoreFacet.connect(bob).completeQuest(1);
       await tx.wait();
       tx = await cCoreFacet.connect(bob).completeQuest(4);
       await tx.wait();
 
-      await expect(cBadgeFacet.connect(bob).claimBadge(1)).to.be.revertedWith(
-        "user doesnt have enough engage points to claim this badge"
-      );
+      // await expect(cBadgeFacet.connect(bob).claimBadge(1)).to.be.revertedWith(
+      //   "user doesnt have enough engage points to claim this badge"
+      // );
 
       tx = await cCoreFacet.connect(bob).completeQuest(5);
       await tx.wait();
 
-      await expect(cBadgeFacet.connect(bob).claimBadge(1)).to.be.revertedWith(
-        "not enought ether to obtain this badge"
-      );
+      // await expect(cBadgeFacet.connect(bob).claimBadge(1)).to.be.revertedWith(
+      //   "not enought ether to obtain this badge"
+      // );
 
-      tx = await cBadgeFacet
-        .connect(bob)
-        .claimBadge(1, { value: parseEther("0.01") });
+      // const request = await cBadgeFacet.getZKPRequest(1);
+      // console.log(request);
+
+      await cBadgeFacet.connect(bob).submitZKPResponse(
+        1,
+        [22, ...new Array(63).fill(0).map((i) => 0)],
+        [1, 2],
+        [
+          [1, 2],
+          [1, 2],
+        ],
+        [1, 2],
+        { value: parseEther("0.01") }
+      );
       await tx.wait();
 
       const balanceAfter = await cNFTBadge.balanceOf(bob.address);

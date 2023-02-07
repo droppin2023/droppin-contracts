@@ -13,14 +13,18 @@ library LibBadgeFacet {
         string name;
         address NFT;
         uint256 groupId;
+        uint256 schemaHash;
     }
     using Counters for Counters.Counter;
     bytes32 constant DIAMOND_STORAGE_POSITION =
         keccak256("diamond.standard.diamond.storage.badge");
     struct BadgeState {
         Counters.Counter badgeIds;
+        Counters.Counter requestIds;
+        address validatorAddr;
         mapping(uint256 => BadgeData) badgesById;
         mapping(uint256 => uint256) mainBadgeOfGroup;
+        mapping(uint256 => uint256) badgeOfRequest;
     }
 
     function diamondStorage() internal pure returns (BadgeState storage ds) {

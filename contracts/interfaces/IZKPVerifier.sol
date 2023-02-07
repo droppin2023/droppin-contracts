@@ -10,9 +10,9 @@ interface IZKPVerifier {
         uint256[2] memory a,
         uint256[2][2] memory b,
         uint256[2] memory c
-    ) external returns (bool);
+    ) external payable returns (bool);
 
-    function getZKPRequest(uint64 requestId)
-        external
-        returns (ICircuitValidator.CircuitQuery memory);
+    function getZKPRequest(
+        uint64 requestId
+    ) external returns (ICircuitValidator.CircuitQuery memory);
 }

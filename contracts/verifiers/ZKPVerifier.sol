@@ -20,7 +20,7 @@ contract ZKPVerifier is IZKPVerifier, Ownable {
         uint256[2] memory a,
         uint256[2][2] memory b,
         uint256[2] memory c
-    ) external override returns (bool) {
+    ) external payable override returns (bool) {
         require(
             requestValidators[requestId] != ICircuitValidator(address(0)),
             "validator is not set for this request id"
@@ -28,7 +28,7 @@ contract ZKPVerifier is IZKPVerifier, Ownable {
         require(
             requestQueries[requestId].schema != 0,
             "query is not set for this request id"
-        ); // query exists
+        );
 
         _beforeProofSubmit(requestId, inputs, requestValidators[requestId]);
 
