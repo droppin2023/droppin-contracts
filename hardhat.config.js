@@ -109,6 +109,14 @@ module.exports = {
       ],
       chainId: 56,
     },
+    mantle_testnet: {
+      url: `${process.env.MANTLETEST_PROVIDER_URL}`,
+      accounts: [
+        process.env.DEPLOYER_PRIVATE_KEY || privateKeys[2],
+        process.env.GOVERNOR_PRIVATE_KEY || privateKeys[1],
+      ],
+      chainId: 5001,
+    },
   },
   namedAccounts: {
     deployerAddr: {
