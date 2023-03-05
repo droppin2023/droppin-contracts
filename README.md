@@ -143,3 +143,15 @@ yarn fund:{network} --amount {AMOUNT} --localaccounts {number of local accounts 
 # `SAMPLE PROJECTS` Still in progress
 
 ## Project Repo
+
+## Mantle Testnet Deployments
+
+| Contract             | Address                                    |
+| -------------------- | ------------------------------------------ |
+| Badge Facuet         | 0x44a29e3404bd796ba7Ec398377A46B5bBE83210e |
+| Core Facuet          | 0x75E16E1fCE3836E23Ed3F42516DE34d320BF3554 |
+| Diamond Cut Facuet   | 0x3924905B5D631fC21c782282625dE8663574F866 |
+| Diamond Loupe Facuet | 0x2c42753C2CF5138344c6332B8Ad9bd2044D2d8ab |
+| Droppin Diamond      | 0x1016EC6720EFD6529d4D0C10F5579577B6265113 |
+| Droppin Diamond Init | 0xB9391175b8A0404ab7D6a82812EdF01318571076 |
+| Ownership Faucet     | 0x3e2DE7da7Ce83a5C9C8AD7897391A0e9E960cA5b |
