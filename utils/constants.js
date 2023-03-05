@@ -1,6 +1,5 @@
-
 const decimals = {};
-decimals.polygon= {};
+decimals.polygon = {};
 decimals.bsc = {};
 decimals.polygon.USDT = 6;
 decimals.polygon.BUSD = 18;
@@ -18,5 +17,5 @@ decimals.bsc.DAI = 18;
 decimals.bsc.DEFAULT = 18;
 
 module.exports = {
-    decimals
+  decimals,
 };
